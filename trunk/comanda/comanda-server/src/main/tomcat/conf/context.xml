@@ -13,7 +13,7 @@
             minIdle="1"
             maxWait="5000"
             username="root"
-            password="mysql"
+            password="Ed#139rd@p"
             driverClassName="com.mysql.jdbc.Driver"
 			url="jdbc:mysql://localhost:3306/comanda"
             validationQuery="SELECT 'OK'"
