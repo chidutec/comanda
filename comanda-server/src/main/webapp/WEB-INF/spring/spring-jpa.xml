@@ -14,7 +14,7 @@
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/task/spring-context-3.0.xsd">
  
     <!-- JPA Configurations -->
-    <jee:jndi-lookup id="myContactDataSource" jndi-name="jdbc/tomcatDataSource" lookup-on-startup="false"
+    <jee:jndi-lookup id="comandaDataSource" jndi-name="jdbc/tomcatDataSource" lookup-on-startup="false"
                      proxy-interface="javax.sql.DataSource"/>
  
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/>
@@ -31,7 +31,7 @@
     </bean>
  
     <!-- Spring Data -->
-    <jpa:repositories base-package="uaiContacts.repository"
+    <jpa:repositories base-package="br.com.ffit.comanda.repository"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManager"/>
 </beans>
