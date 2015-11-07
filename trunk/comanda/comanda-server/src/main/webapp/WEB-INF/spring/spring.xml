@@ -8,10 +8,10 @@
 	<!-- Basic Configurations -->
 	<context:annotation-config />
 
-	<context:component-scan base-package="br.com.ffit.model.*" />
-	<context:component-scan base-package="br.com.ffit.repository.*" />
-	<context:component-scan base-package="br.com.ffit.service.*" />
-	<context:component-scan base-package="br.com.ffit.controller.*" />
+	<context:component-scan base-package="br.com.ffit.comanda.model" />
+	<context:component-scan base-package="br.com.ffit.comanda.repository" />
+	<context:component-scan base-package="br.com.ffit.comanda.service" />
+	<context:component-scan base-package="br.com.ffit.comanda.controller" />
 	
 	<!-- SpringData -->
 	<import resource="spring-jpa.xml" />
