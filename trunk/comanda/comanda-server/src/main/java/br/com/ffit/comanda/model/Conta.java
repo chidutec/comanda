@@ -1,41 +1,88 @@
 package br.com.ffit.comanda.model;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "conta")
 public class Conta {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
-	private List<Item> itens;
-	private List<Usuario> usuarios;
+	private Date dataAbertura;
+	private Date dataFechamento;
+	
+	@OneToMany(mappedBy = "conta")
+	private Set<Item> itens;
+	
+	@ManyToMany
+	@JoinTable(name = "usuario_conta" ,joinColumns=
+{@JoinColumn(name="conta_id")}, inverseJoinColumns=
+  {@JoinColumn(name="usuario_id")})
+	private Set<Usuario> usuarios;
+	
+	@ManyToOne
+	private Estabelecimento estabelecimento;
 
 	public Long getId() {
 		return id;
 	}
 
+	public Date getDataAbertura() {
+		return dataAbertura;
+	}
+
+	public void setDataAbertura(Date dataAbertura) {
+		this.dataAbertura = dataAbertura;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
 
-	public List<Item> getItens() {
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
+	}
+
+	public Set<Item> getItens() {
 		return itens;
 	}
 
-	public void setItens(List<Item> itens) {
+	public void setItens(Set<Item> itens) {
 		this.itens = itens;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
 	
+
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
+	}
+
 }
