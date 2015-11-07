@@ -5,8 +5,12 @@ import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "produto")
 public class Produto {
 
 	@Id
@@ -16,6 +20,8 @@ public class Produto {
 	private String descricao;
 	private BigDecimal preco;
 	
+	@ManyToOne
+	private Estabelecimento estabelecimento;
 	
 	public String getNome() {
 		return nome;
@@ -34,6 +40,12 @@ public class Produto {
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
+	}
+	public Estabelecimento getEstabelecimento() {
+		return estabelecimento;
+	}
+	public void setEstabelecimento(Estabelecimento estabelecimento) {
+		this.estabelecimento = estabelecimento;
 	}
 	
 }
