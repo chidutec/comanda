@@ -16,23 +16,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "conta")
 public class Conta {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;
-	
+
 	private Date dataAbertura;
 	private Date dataFechamento;
-	
+
 	@OneToMany(mappedBy = "conta")
 	private Set<Item> itens;
-	
+
 	@ManyToMany
-	@JoinTable(name = "usuario_conta" ,joinColumns=
-{@JoinColumn(name="conta_id")}, inverseJoinColumns=
-  {@JoinColumn(name="usuario_id")})
+	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "conta_id") }, inverseJoinColumns = { @JoinColumn(name = "usuario_id") })
 	private Set<Usuario> usuarios;
-	
+
 	@ManyToOne
 	private Estabelecimento estabelecimento;
 
@@ -51,7 +49,7 @@ public class Conta {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Date getDataFechamento() {
 		return dataFechamento;
 	}
@@ -75,7 +73,6 @@ public class Conta {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	
 
 	public Estabelecimento getEstabelecimento() {
 		return estabelecimento;
