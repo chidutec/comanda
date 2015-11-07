@@ -1,10 +1,10 @@
 package br.com.ffit.comanda.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,7 +16,7 @@ public class UsuarioItem {
 	@GeneratedValue
 	private Long id;
 	
-	private Integer Quantidade;
+	private BigDecimal Quantidade;
 	
 	@ManyToOne
 	private Usuario usuario;
@@ -32,11 +32,11 @@ public class UsuarioItem {
 		this.id = id;
 	}
 
-	public Integer getQuantidade() {
+	public BigDecimal getQuantidade() {
 		return Quantidade;
 	}
 
-	public void setQuantidade(Integer quantidade) {
+	public void setQuantidade(BigDecimal quantidade) {
 		Quantidade = quantidade;
 	}
 

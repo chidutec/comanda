@@ -17,7 +17,7 @@ public class EstabelecimentoController {
 	@Autowired
 	private EstabelecimentoService estabelecimentoService;
 
-	@RequestMapping(value = "/inserirProduto", method = RequestMethod.POST)
+	@RequestMapping(value = "/inserirProduto", method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public @ResponseBody Produto inserirProduto(@RequestBody Produto produto) {
 		return estabelecimentoService.inserirProduto(produto);
 	}

@@ -27,7 +27,6 @@
         <property name="dataSource" ref="comandaDataSource"/>
         <property name="persistenceUnitName" value="comandaPU"/>
         <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" />
- 
     </bean>
  
     <!-- Spring Data -->
