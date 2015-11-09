@@ -2,11 +2,15 @@ package br.com.ffit.comanda.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "estabelecimento")
@@ -15,12 +19,17 @@ public class Estabelecimento {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String Nome;
 	
-	@OneToMany(mappedBy = "estabelecimento")
+	private String login;
+	private String senha;
+	private String nome;
+	
+	@Transient
+	@OneToMany(mappedBy = "estabelecimento", cascade = CascadeType.ALL)
 	private Set<Conta> contas;
 	
-	@OneToMany(mappedBy = "estabelecimento")
+	@Transient
+	@OneToMany(mappedBy = "estabelecimento", cascade = CascadeType.ALL)
 	private Set<Produto> produtos;
 	
 	public Long getId() {
@@ -29,11 +38,23 @@ public class Estabelecimento {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	public String getNome() {
-		return Nome;
+		return nome;
 	}
 	public void setNome(String nome) {
-		Nome = nome;
+		nome = nome;
 	}
 	
 	public Set<Conta> getContas() {

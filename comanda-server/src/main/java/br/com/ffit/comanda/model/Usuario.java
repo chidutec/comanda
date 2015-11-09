@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "usuario")
@@ -20,11 +21,15 @@ public class Usuario {
 	@GeneratedValue
 	private Long id;
 	private String nome;
+	private String login;
+	private String senha;
 
-	@ManyToMany
+	@Transient
+	@ManyToMany(cascade= CascadeType.ALL)
 	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = { @JoinColumn(name = "conta_id") })
 	private Set<Conta> contas;
 
+	@Transient
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
 	private Set<UsuarioItem> usuarioItens;
 
@@ -42,6 +47,14 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public Set<Conta> getContas() {

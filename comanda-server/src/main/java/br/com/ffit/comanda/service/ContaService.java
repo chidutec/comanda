@@ -16,7 +16,7 @@ public class ContaService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	public List<Item> getItensById(Long id) {
+	public List<Item> findItensById(Long id) {
 		Conta conta = new Conta();
 		conta.setId(id);
 		return itemRepository.findByConta(conta);

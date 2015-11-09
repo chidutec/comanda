@@ -3,6 +3,7 @@ package br.com.ffit.comanda.model;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "conta")
@@ -24,13 +26,16 @@ public class Conta {
 	private Date dataAbertura;
 	private Date dataFechamento;
 
-	@OneToMany(mappedBy = "conta")
+	@Transient
+	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
 	private Set<Item> itens;
 
-	@ManyToMany
+	@Transient
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "conta_id") }, inverseJoinColumns = { @JoinColumn(name = "usuario_id") })
 	private Set<Usuario> usuarios;
 
+	@Transient
 	@ManyToOne
 	private Estabelecimento estabelecimento;
 

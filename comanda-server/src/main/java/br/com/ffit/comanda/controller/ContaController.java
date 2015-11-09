@@ -19,9 +19,9 @@ public class ContaController {
 	@Autowired
 	private ContaService contaService;
 	
-	@RequestMapping(value="/getItens/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="{id}/getItens", method = RequestMethod.GET)
 	public @ResponseBody List<Item> getItens(@PathVariable Long id) {
-		return contaService.getItensById(id);
+		return contaService.findItensById(id);
 	}
 	
 }
