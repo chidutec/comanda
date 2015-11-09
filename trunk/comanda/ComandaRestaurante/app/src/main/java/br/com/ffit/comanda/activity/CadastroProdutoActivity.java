@@ -11,29 +11,32 @@ import org.androidannotations.annotations.ViewById;
 import java.math.BigDecimal;
 
 import br.com.ffit.comanda.service.EstabelecimentoService;
+import br.com.ffit.comanda.to.ProdutoTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_cadastro_produto)
 public class CadastroProdutoActivity extends AppCompatActivity {
 
         @ViewById(R.id.inputNome)
-        private EditText inputNome;
+        EditText inputNome;
 
         @ViewById(R.id.inputDesc)
-        private EditText inputDesc;
+        EditText inputDesc;
 
         @ViewById(R.id.inputPreco)
-        private EditText inputPreco;
+        EditText inputPreco;
 
         @Bean
         EstabelecimentoService estabelecimentoService;
 
         @Click
         public void btnCadastrarProduto() {
-            String nome = inputNome.getText().toString();
-            String desc = inputDesc.getText().toString();
-            BigDecimal preco = new BigDecimal(inputPreco.getText().toString());
-            estabelecimentoService.inserirProduto(nome, desc, preco);
+            ProdutoTO produtoTO = new ProdutoTO();
+            produtoTO.setNome(inputNome.getText().toString());
+            produtoTO.setDescricao(inputDesc.getText().toString());
+            produtoTO.setPreco(new BigDecimal(inputPreco.getText().toString()));
+            produtoTO.setIdEstabelecimento(1L);
+            estabelecimentoService.inserirProduto(produtoTO);
         }
 
 }
