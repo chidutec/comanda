@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.ffit.comanda.dto.JSONResponse;
+import br.com.ffit.comanda.dto.ProdutoTO;
 import br.com.ffit.comanda.exception.BussinessException;
 import br.com.ffit.comanda.model.Estabelecimento;
 import br.com.ffit.comanda.model.Produto;
@@ -21,13 +22,12 @@ public class EstabelecimentoController {
 	private EstabelecimentoService estabelecimentoService;
 
 	@RequestMapping(value = "/inserirProduto", method = RequestMethod.POST)
-	public @ResponseBody Produto inserirProduto(@RequestBody Produto produto) {
-		return estabelecimentoService.inserirProduto(produto);
+	public @ResponseBody Produto inserirProduto(@RequestBody ProdutoTO produtoTO) {
+		return estabelecimentoService.inserirProduto(produtoTO);
 	}
 
 	@RequestMapping(value = "/inserirEstabelecimento", method = RequestMethod.POST)
-	public @ResponseBody JSONResponse inserirEstabelecimento(
-			@RequestBody Estabelecimento estabelecimento) {
+	public @ResponseBody JSONResponse inserirEstabelecimento(@RequestBody Estabelecimento estabelecimento) {
 		JSONResponse jsonResponse = new JSONResponse();
 		try {
 			estabelecimentoService.inserirEstabelecimento(estabelecimento);
