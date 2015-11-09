@@ -2,6 +2,7 @@ package br.com.ffit.comanda.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,9 +21,15 @@ public class Produto {
 	private String descricao;
 	private BigDecimal preco;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	private Estabelecimento estabelecimento;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
