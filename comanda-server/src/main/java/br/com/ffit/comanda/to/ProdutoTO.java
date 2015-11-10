@@ -1,4 +1,4 @@
-package br.com.ffit.comanda.dto;
+package br.com.ffit.comanda.to;
 
 import java.math.BigDecimal;
 

@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.ffit.comanda.dto.JSONResponse;
-import br.com.ffit.comanda.dto.ProdutoTO;
-import br.com.ffit.comanda.exception.BussinessException;
+import br.com.ffit.comanda.exception.BusinessException;
 import br.com.ffit.comanda.model.Estabelecimento;
 import br.com.ffit.comanda.model.Produto;
 import br.com.ffit.comanda.service.EstabelecimentoService;
+import br.com.ffit.comanda.to.JSONResponse;
+import br.com.ffit.comanda.to.LoginTO;
+import br.com.ffit.comanda.to.ProdutoTO;
 
 @Controller
 @RequestMapping(value = "/estabelecimento")
@@ -32,12 +33,17 @@ public class EstabelecimentoController {
 		try {
 			estabelecimentoService.inserirEstabelecimento(estabelecimento);
 			jsonResponse.setSuccess(true);
-		} catch (BussinessException e) {
+		} catch (BusinessException e) {
 			jsonResponse.setErrorMessage(e.getMessage());
 			jsonResponse.setSuccess(false);
 		}
 
 		return jsonResponse;
+	}
+	
+	@RequestMapping(value="/fazerLogin", method = RequestMethod.POST)
+	public @ResponseBody JSONResponse fazerLogin(@RequestBody LoginTO loginTO) {
+		return estabelecimentoService.fazerLogin(loginTO);
 	}
 
 }
