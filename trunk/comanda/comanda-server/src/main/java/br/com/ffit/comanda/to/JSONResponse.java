@@ -1,4 +1,4 @@
-package br.com.ffit.comanda.dto;
+package br.com.ffit.comanda.to;
 
 public class JSONResponse {
 	

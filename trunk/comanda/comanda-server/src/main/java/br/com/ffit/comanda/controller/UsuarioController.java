@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.ffit.comanda.model.Usuario;
 import br.com.ffit.comanda.service.UsuarioService;
+import br.com.ffit.comanda.to.JSONResponse;
+import br.com.ffit.comanda.to.LoginTO;
 
 @Controller
 @RequestMapping("/usuario")
@@ -20,6 +22,11 @@ public class UsuarioController {
 	@RequestMapping(value="/inserirUsuario", method = RequestMethod.POST)
 	public @ResponseBody Usuario inserirUsuario(@RequestBody Usuario usuario) {
 		return usuarioService.inserirUsuario(usuario);
+	}
+	
+	@RequestMapping(value="/fazerLogin", method = RequestMethod.POST)
+	public @ResponseBody JSONResponse fazerLogin(@RequestBody LoginTO loginTO) {
+		return usuarioService.fazerLogin(loginTO);
 	}
 	
 }
