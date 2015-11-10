@@ -5,7 +5,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.ffit.comanda.activity.LoginRestauranteActivity">
+    tools:context="br.com.ffitcomanda.LoginGabaritoActivity">
 
     <!-- Login progress -->
     <ProgressBar android:id="@+id/login_progress" style="?android:attr/progressBarStyleLarge"
@@ -22,8 +22,8 @@
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <AutoCompleteTextView android:id="@+id/inputLogin" android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:hint="@string/prompt_login"
+                <AutoCompleteTextView android:id="@+id/inputEmail" android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress" android:maxLines="1"
                     android:singleLine="true" />
 
@@ -32,7 +32,7 @@
             <android.support.design.widget.TextInputLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText android:id="@+id/inputPassword" android:layout_width="match_parent"
+                <EditText android:id="@+id/inputSenha" android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:hint="@string/prompt_password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
@@ -42,20 +42,24 @@
             </android.support.design.widget.TextInputLayout>
 
             <Button android:id="@+id/btnLogin" style="?android:textAppearanceSmall"
-                android:layout_width="135dp" android:layout_height="wrap_content"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" android:text="@string/action_sign_in"
                 android:textStyle="bold" />
 
             <Button
-                style="?android:textAppearanceSmall"
-                android:id="@+id/button"
-                android:layout_width="136dp"
+                android:layout_width="365dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/action_register"
-                android:textStyle="bold"
-                android:layout_gravity="right" />
+                android:text="Cadastrar"
+                android:id="@+id/btnCadastrar"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtMessageLogin"
+                android:layout_gravity="center_horizontal" />
 
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
