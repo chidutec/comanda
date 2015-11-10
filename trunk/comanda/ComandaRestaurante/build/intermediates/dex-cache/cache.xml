@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/eduardo/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-12ebbb9c37a3f12719bbf4ea876116fd5ba8a0fd.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.4.0/d6a66c7a5f01cf500377bd669507a08cfeba882a/jackson-annotations-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d6a66c7a5f01cf500377bd669507a08cfeba882a">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/jackson-annotations-2.4.0-db970012561bc08ea721c42490dc7ee727636354.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/classes-1ceaa55c91f0e42c391a5e7d94e5bad8675a2f01.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/org.springframework.android/spring-android-core/2.0.0.M1/26b2d3262a0c5f8de663deeb6481d132d871fffa/spring-android-core-2.0.0.M1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="26b2d3262a0c5f8de663deeb6481d132d871fffa">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/spring-android-core-2.0.0.M1-e809e21c27b07f54fd1ac6bd04e9cc5459b75ddb.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/classes-6fe7b9bf15951374985b82b42e97122d2008524e.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.4.1/f07c773f7b3a03c3801d405cadbdc93f7548e321/jackson-databind-2.4.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f07c773f7b3a03c3801d405cadbdc93f7548e321">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/jackson-databind-2.4.1-0db2785432b4b98181a73b316161bf79532d3fa2.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/org.androidannotations/androidannotations-api/3.3.2/7d6149d856b880bbd676047aacb8446a758fbbdb/androidannotations-api-3.3.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="7d6149d856b880bbd676047aacb8446a758fbbdb">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/androidannotations-api-3.3.2-0d69ebf0a495e0ef4425521578969a6dc88745e1.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-84ef6343161b5e82c2584eb9d13554db1b0b2e13.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/org.springframework.android/spring-android-rest-template/2.0.0.M1/6abb1e22445a4e4571c74632804e4179b43d82b5/spring-android-rest-template-2.0.0.M1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6abb1e22445a4e4571c74632804e4179b43d82b5">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/spring-android-rest-template-2.0.0.M1-dca8dead687144b0f0b40c6871902c51f8d22a38.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/org.codehaus.jackson/jackson-core-asl/1.9.13/3c304d70f42f832e0a86d45bd437f692129299a4/jackson-core-asl-1.9.13.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3c304d70f42f832e0a86d45bd437f692129299a4">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/jackson-core-asl-1.9.13-21117c11020cbb50fdc42d0c3ae43f2731bcb094.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.4.1/b130bcfb5a9c410c3cbd2e0adec9437e69a39e2c/jackson-core-2.4.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="b130bcfb5a9c410c3cbd2e0adec9437e69a39e2c">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/jackson-core-2.4.1-3879dd791f245bff45378d1ffca8202b9bcf4520.jar" />
+    </item>
+    <item
+        jar="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/home/eduardo/AdnroidProjects/ComandaRestaurante/app/build/intermediates/pre-dexed/debug/classes-f1ad820b36ad8309ede35cddb78933b9fbb061c3.jar" />
+    </item>
+
+</items>
