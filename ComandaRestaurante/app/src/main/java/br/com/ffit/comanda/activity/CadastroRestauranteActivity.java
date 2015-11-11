@@ -9,6 +9,7 @@ import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -29,12 +30,15 @@ public class CadastroRestauranteActivity extends Activity {
     @ViewById(R.id.inputNomeCadastro)
     EditText inputNomeCadastro;
 
+    @Extra("login")
+    String login;
+
     @Bean
     EstabelecimentoService estabelecimentoService;
 
     @AfterViews
     public void loadPassedLogin() {
-        inputEmailCadastro.setText(this.getIntent().getStringExtra("login"));
+        inputEmailCadastro.setText(login);
     }
 
 

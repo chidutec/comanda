@@ -96,7 +96,7 @@ public class LoginRestauranteActivity extends Activity {
     @UiThread
     public void callBackFazerLogin(JSONResponse jsonResponse) {
         if (jsonResponse.getSuccess()) {
-            // Lança Atividade DashBoard
+            DashBoardRestauranteActivity_.intent(this).start();
         } else {
             Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }
