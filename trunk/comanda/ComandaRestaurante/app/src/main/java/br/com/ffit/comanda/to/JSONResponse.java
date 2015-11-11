@@ -4,14 +4,14 @@ package br.com.ffit.comanda.to;
 public class JSONResponse {
 
     Boolean success;
-    String errorMessage;
+    String message;
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Boolean getSuccess() {

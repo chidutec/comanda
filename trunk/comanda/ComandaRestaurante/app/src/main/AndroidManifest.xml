@@ -20,13 +20,13 @@
         <activity android:name="br.com.ffit.comanda.activity.LoginRestauranteActivity_" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="br.com.ffit.comanda.activity.CadastroProdutoActivity_"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:name="br.com.ffit.comanda.activity.CadastroRestauranteActivity_"
+            android:label="@string/title_activity_cadastro_restaurante" >
         </activity>
     </application>
 
