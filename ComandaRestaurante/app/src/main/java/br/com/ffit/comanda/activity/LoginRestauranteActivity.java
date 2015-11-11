@@ -1,18 +1,18 @@
 package br.com.ffit.comanda.activity;
 
 import android.app.Activity;
-import android.support.annotation.UiThread;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.Background;
+import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.androidannotations.annotations.rest.RestService;
 
-import br.com.ffit.comanda.rest.EstabelecimentoService;
+import br.com.ffit.comanda.service.EstabelecimentoService;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.LoginTO;
 import ffit.com.br.comanda.R;
@@ -21,7 +21,7 @@ import ffit.com.br.comanda.R;
 public class LoginRestauranteActivity extends Activity {
 
 
-    @RestService
+    @Bean
     EstabelecimentoService estabelecimentoService;
 
     @ViewById(R.id.inputEmail)
@@ -40,19 +40,50 @@ public class LoginRestauranteActivity extends Activity {
         String login = inputEmail.getText().toString();
         String senha = inputSenha.getText().toString();
 
-        if (login.isEmpty() && !senha.isEmpty()) {
+        if (login.isEmpty()) {
             Toast.makeText(this, "Preencha o Login", Toast.LENGTH_SHORT).show();
-        } else if(!login.isEmpty() && senha.isEmpty()) {
+            return;
+        }
+
+        if (senha.isEmpty()) {
             Toast.makeText(this, "Preencha a Senha", Toast.LENGTH_SHORT).show();
-        } else if(login.isEmpty() && senha.isEmpty()) {
-            Toast.makeText(this, "Preencha login e senha", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        } else {
+        LoginTO loginTO = new LoginTO();
+        loginTO.setLogin(login);
+        loginTO.setSenha(senha);
+        fazerLogin(loginTO);
+    }
 
+    @Click
+    public void btnCadastrar() {
+        String login = inputEmail.getText().toString();
+
+        //Caso o campo login esteja preenchido, verificar disponibilidade. Se não apenas abrir a próxima tela
+        if (!login.isEmpty()) {
             LoginTO loginTO = new LoginTO();
             loginTO.setLogin(login);
-            loginTO.setSenha(senha);
-            fazerLogin(loginTO);
+            verificaDisponibilidadeLogin(loginTO);
+        } else {
+            CadastroRestauranteActivity_.intent(this).start();
+        }
+    }
+
+    @Background
+    public void verificaDisponibilidadeLogin(LoginTO loginTO) {
+        //Inicia serviço que verifica disponibilidade do login no servidor
+        JSONResponse jsonResponse = estabelecimentoService.verificaDisponibilidadeLogin(loginTO);
+        callBackVerificaDisponibilidadeLogin(jsonResponse, loginTO);
+    }
+
+    @UiThread
+    public void callBackVerificaDisponibilidadeLogin(JSONResponse jsonResponse, LoginTO loginTo) {
+        //Caso login nao exista, passar para próximo tela com ele de parametro
+        if (jsonResponse.getSuccess()) {
+            CadastroRestauranteActivity_.intent(this).extra("login", loginTo.getLogin()).start();
+        } else {
+            Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -64,11 +95,10 @@ public class LoginRestauranteActivity extends Activity {
 
     @UiThread
     public void callBackFazerLogin(JSONResponse jsonResponse) {
-        if(jsonResponse.getSuccess()) {
-            //Proxima activity
+        if (jsonResponse.getSuccess()) {
+            // Lança Atividade DashBoard
         } else {
-            //Toast.makeText(getApplicationContext(), jsonResponse.getErrorMessage(), Toast.LENGTH_SHORT).show();
-            viewMessageLogin.setText(jsonResponse.getErrorMessage());
+            Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
