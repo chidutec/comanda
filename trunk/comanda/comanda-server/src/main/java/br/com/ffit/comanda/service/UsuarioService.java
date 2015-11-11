@@ -27,11 +27,11 @@ public class UsuarioService {
 				jsonResponse.setSuccess(true);
 			} else {
 				jsonResponse.setSuccess(false);
-				jsonResponse.setErrorMessage("Senha invalida");
+				jsonResponse.setMessage("Senha invalida");
 			}
 		} else {
 			jsonResponse.setSuccess(false);
-			jsonResponse.setErrorMessage("Usuario nao cadastrado");
+			jsonResponse.setMessage("Usuario nao cadastrado");
 		}
 		return jsonResponse;
 	}

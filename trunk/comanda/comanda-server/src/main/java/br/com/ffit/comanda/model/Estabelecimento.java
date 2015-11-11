@@ -54,7 +54,7 @@ public class Estabelecimento {
 		return nome;
 	}
 	public void setNome(String nome) {
-		nome = nome;
+		this.nome = nome;
 	}
 	
 	public Set<Conta> getContas() {
