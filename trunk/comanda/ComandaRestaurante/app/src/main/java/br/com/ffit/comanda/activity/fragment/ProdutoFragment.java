@@ -13,12 +13,19 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.activity.fragment.dummy.DummyContent;
 import ffit.com.br.comanda.R;
 
-
+/**
+ * A fragment representing a list of Items.
+ * <p/>
+ * Large screen devices (such as tablets) are supported by replacing the ListView
+ * with a GridView.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
+ * interface.
+ */
 @EFragment(R.layout.fragment_produto)
 public class ProdutoFragment extends Fragment implements AbsListView.OnItemClickListener {
 
@@ -33,9 +40,10 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
 
     private OnFragmentInteractionListener mListener;
 
-
-    @ViewById(android.R.id.list)
-    AbsListView mListView;
+    /**
+     * The fragment's ListView/GridView.
+     */
+    private AbsListView mListView;
 
     /**
      * The Adapter which will be used to populate the ListView/GridView with
@@ -77,13 +85,16 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_produto, container, false);
 
+        // Set the adapter
+        mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 
-        return null;
+        return view;
     }
 
     @Override
