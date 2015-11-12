@@ -1,8 +1,10 @@
 package br.com.ffit.comanda.activity;
 
+import android.app.FragmentManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,12 +21,14 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
+import br.com.ffit.comanda.activity.fragment.ProdutoFragment;
+import br.com.ffit.comanda.activity.fragment.ProdutoFragment_;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_dash_board_restaurante)
 @OptionsMenu({R.menu.dash_board_restaurante})
 public class DashBoardRestauranteActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ProdutoFragment.OnFragmentInteractionListener{
 
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
@@ -71,11 +75,14 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment selected = new Fragment();
         int id = item.getItemId();
 
-        if (id == R.id.nav_camara) {
-            Toast.makeText(this, "camera", Toast.LENGTH_SHORT).show();
+        if (id == R.id.nav_produto) {
+            selected = ProdutoFragment_.builder().build();
+            Toast.makeText(this, "produtos", Toast.LENGTH_SHORT).show();
+
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -88,7 +95,15 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
 
         }
 
+        fragmentManager.beginTransaction()
+                .replace(R.id.dashboardContainer, selected)
+                .commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
     }
 }
