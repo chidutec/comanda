@@ -1,5 +1,8 @@
 package br.com.ffit.comanda.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,44 +19,41 @@ import br.com.ffit.comanda.to.ProdutoTO;
 public class EstabelecimentoService {
 
 	@Autowired
-	ProdutoRepository produtoRepository;
+	EstabelecimentoRepository estabelecimentoRepository;
+	
 
 	@Autowired
-	EstabelecimentoRepository estabelecimentoRepository;
+	ProdutoRepository produtoRepository;
 
-	public Produto inserirProduto(ProdutoTO produtoTO) {
-		Produto produto = new Produto();
-		produto.setNome(produtoTO.getNome());
-		produto.setDescricao(produtoTO.getDescricao());
-		produto.setPreco(produtoTO.getPreco());
 
-		Estabelecimento estabelecimento = new Estabelecimento();
-		estabelecimento.setId(produtoTO.getIdEstabelecimento());
+	public JSONResponse<EstabelecimentoTO> inserirEstabelecimento(
+			EstabelecimentoTO estabelecimentoTO) {
+		JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
 
-		produto.setEstabelecimento(estabelecimento);
-		return produtoRepository.save(produto);
-	}
-
-	public JSONResponse inserirEstabelecimento(EstabelecimentoTO estabelecimentoTO) {
-		JSONResponse jsonResponse = new JSONResponse();
-		
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setLogin(estabelecimentoTO.getLogin());
 		estabelecimento.setSenha(estabelecimentoTO.getSenha());
 		estabelecimento.setNome(estabelecimentoTO.getNome());
-		
+
 		estabelecimentoRepository.save(estabelecimento);
 		jsonResponse.setSuccess(true);
 		jsonResponse.setMessage("Estabelecimento criado");
+		jsonResponse.setObj(estabelecimentoTO);
 		return jsonResponse;
 	}
 
-	public JSONResponse fazerLogin(LoginTO loginTO) {
-		JSONResponse jsonResponse = new JSONResponse();
+	public JSONResponse<EstabelecimentoTO> fazerLogin(LoginTO loginTO) {
+		JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
 		Estabelecimento estabelecimento = estabelecimentoRepository
 				.findByLogin(loginTO.getLogin());
 		if (estabelecimento != null) {
 			if (estabelecimento.getSenha().equals(loginTO.getSenha())) {
+				EstabelecimentoTO estabelecimentoTO  = new EstabelecimentoTO();
+				estabelecimentoTO.setLogin(estabelecimento.getLogin());
+				estabelecimentoTO.setNome(estabelecimento.getNome());
+				estabelecimentoTO.setSenha(estabelecimento.getSenha());
+				
+				jsonResponse.setObj(estabelecimentoTO);
 				jsonResponse.setSuccess(true);
 			} else {
 				jsonResponse.setSuccess(false);
@@ -77,6 +77,24 @@ public class EstabelecimentoService {
 			jsonResponse.setMessage("Login nao disponivel");
 		}
 		return jsonResponse;
+	}
+
+	public List<ProdutoTO> buscaProdutos(Long idEstabelecimento) {
+		Estabelecimento estabelecimento = new Estabelecimento();
+		estabelecimento.setId(idEstabelecimento);
+		
+		List<Produto> produtos = produtoRepository.findByEstabelecimento(estabelecimento);
+				
+		List<ProdutoTO> produtosTO = new ArrayList<ProdutoTO>();
+		for(Produto produto: produtos) {
+			ProdutoTO produtoTO = new ProdutoTO();
+			produtoTO.setNome(produto.getNome());
+			produtoTO.setDescricao(produto.getDescricao());
+			produtoTO.setPreco(produto.getPreco());
+			produtosTO.add(produtoTO);
+		}
+		
+		return produtosTO;
 	}
 
 }
