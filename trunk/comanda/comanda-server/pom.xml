@@ -146,6 +146,14 @@
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
 		</dependency>
+		
+		<!-- Dependências próprias -->
+		
+		<dependency>
+			<groupId>br.com.ffit</groupId>
+			<artifactId>comanda-to</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 	</dependencies>
 </project>

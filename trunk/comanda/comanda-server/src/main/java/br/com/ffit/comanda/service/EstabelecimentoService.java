@@ -35,7 +35,8 @@ public class EstabelecimentoService {
 		estabelecimento.setSenha(estabelecimentoTO.getSenha());
 		estabelecimento.setNome(estabelecimentoTO.getNome());
 
-		estabelecimentoRepository.save(estabelecimento);
+		Estabelecimento aux = estabelecimentoRepository.save(estabelecimento);
+		estabelecimentoTO.setId(aux.getId());
 		jsonResponse.setSuccess(true);
 		jsonResponse.setMessage("Estabelecimento criado");
 		jsonResponse.setObj(estabelecimentoTO);
@@ -52,7 +53,7 @@ public class EstabelecimentoService {
 				estabelecimentoTO.setLogin(estabelecimento.getLogin());
 				estabelecimentoTO.setNome(estabelecimento.getNome());
 				estabelecimentoTO.setSenha(estabelecimento.getSenha());
-				
+				estabelecimentoTO.setId(estabelecimento.getId());
 				jsonResponse.setObj(estabelecimentoTO);
 				jsonResponse.setSuccess(true);
 			} else {

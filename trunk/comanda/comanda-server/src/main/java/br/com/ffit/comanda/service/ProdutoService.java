@@ -30,7 +30,7 @@ public class ProdutoService {
 			produto.setEstabelecimento(estabelecimento);
 			produtoRepository.save(produto);
 		} else {
-			throw new BusinessException("Produto já cadastrado com este nome");
+			throw new BusinessException("Produto ja cadastrado com este nome");
 		}
 	}
 }
