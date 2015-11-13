@@ -1,6 +1,7 @@
 package br.com.ffit.comanda.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ public class LoginRestauranteActivity extends Activity {
     @ViewById(R.id.viewMessageLogin)
     TextView viewMessageLogin;
 
+    ProgressDialog progressDialog;
 
     @Click
     public void btnLogin() {
@@ -54,6 +56,7 @@ public class LoginRestauranteActivity extends Activity {
         LoginTO loginTO = new LoginTO();
         loginTO.setLogin(login);
         loginTO.setSenha(senha);
+        progressDialog = ProgressDialog.show(this, "Logando", "Aguarde", true);
         fazerLogin(loginTO);
     }
 
@@ -65,6 +68,7 @@ public class LoginRestauranteActivity extends Activity {
         if (!login.isEmpty()) {
             LoginTO loginTO = new LoginTO();
             loginTO.setLogin(login);
+            progressDialog = ProgressDialog.show(this, "Verificando Disponibilidade do Login", "Aguarde", true);
             verificaDisponibilidadeLogin(loginTO);
         } else {
             CadastroRestauranteActivity_.intent(this).start();
@@ -81,6 +85,7 @@ public class LoginRestauranteActivity extends Activity {
     @UiThread
     public void callBackVerificaDisponibilidadeLogin(JSONResponse jsonResponse, LoginTO loginTo) {
         //Caso login nao exista, passar para próximo tela com ele de parametro
+        progressDialog.dismiss();
         if (jsonResponse.getSuccess()) {
             CadastroRestauranteActivity_.intent(this).extra("login", loginTo.getLogin()).start();
         } else {
@@ -96,8 +101,9 @@ public class LoginRestauranteActivity extends Activity {
 
     @UiThread
     public void callBackFazerLogin(JSONResponse<EstabelecimentoTO> jsonResponse) {
+        progressDialog.dismiss();
         if (jsonResponse.getSuccess()) {
-            DashBoardRestauranteActivity_.intent(this).extra("estabelecimento", jsonResponse.getObj()).start();
+            DashBoardRestauranteActivity_.intent(this).extra("estabelecimentoTO", jsonResponse.getObj()).start();
         } else {
             Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }

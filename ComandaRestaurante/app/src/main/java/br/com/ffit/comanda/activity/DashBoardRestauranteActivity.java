@@ -45,7 +45,7 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
 
-    @Extra("estabelecimento")
+    @Extra("estabelecimentoTO")
     EstabelecimentoTO estabelecimentoTO;
 
     @ViewById(R.id.navDrawerEmail)
@@ -95,7 +95,7 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_produto) {
-            selected = ProdutoFragment_.builder().build();
+            selected = ProdutoFragment_.builder().estabelecimentoTO(estabelecimentoTO).build();
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

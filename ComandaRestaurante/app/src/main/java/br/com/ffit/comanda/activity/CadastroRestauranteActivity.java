@@ -1,6 +1,7 @@
 package br.com.ffit.comanda.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class CadastroRestauranteActivity extends Activity {
     @Bean
     EstabelecimentoService estabelecimentoService;
 
+    ProgressDialog progressDialog;
+
     @AfterViews
     public void loadPassedLogin() {
         inputEmailCadastro.setText(login);
@@ -68,6 +71,7 @@ public class CadastroRestauranteActivity extends Activity {
         estabelecimentoTO.setSenha(senha);
         estabelecimentoTO.setNome(nome);
 
+        progressDialog = ProgressDialog.show(this, "Cadastrando", "Aguarde", true);
         cadastraEstabelecimento(estabelecimentoTO);
 
     }
@@ -80,9 +84,10 @@ public class CadastroRestauranteActivity extends Activity {
 
     @UiThread
     public void callbackCadastraEstabelecimento(JSONResponse<EstabelecimentoTO> jsonResponse) {
+        progressDialog.dismiss();
         Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         if(jsonResponse.getSuccess()) {
-            DashBoardRestauranteActivity_.intent(this).extra("estabelecimento", jsonResponse.getObj()).start();
+            DashBoardRestauranteActivity_.intent(this).extra("estabelecimentoTO", jsonResponse.getObj()).start();
         }
     }
 
