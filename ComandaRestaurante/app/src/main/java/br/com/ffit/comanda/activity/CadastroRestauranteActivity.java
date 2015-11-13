@@ -74,15 +74,15 @@ public class CadastroRestauranteActivity extends Activity {
 
     @Background
     public void cadastraEstabelecimento(EstabelecimentoTO estabelecimentoTO) {
-        JSONResponse jsonResponse = estabelecimentoService.cadastraEstabelecimento(estabelecimentoTO);
-        callbackCadastraEstabelecimento(jsonResponse, estabelecimentoTO);
+        JSONResponse<EstabelecimentoTO> jsonResponse = estabelecimentoService.cadastraEstabelecimento(estabelecimentoTO);
+        callbackCadastraEstabelecimento(jsonResponse);
     }
 
     @UiThread
-    public void callbackCadastraEstabelecimento(JSONResponse jsonResponse, EstabelecimentoTO estabelecimentoTO) {
+    public void callbackCadastraEstabelecimento(JSONResponse<EstabelecimentoTO> jsonResponse) {
         Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         if(jsonResponse.getSuccess()) {
-            // Lanca Atividade Dashboard
+            DashBoardRestauranteActivity_.intent(this).extra("estabelecimento", jsonResponse.getObj()).start();
         }
     }
 

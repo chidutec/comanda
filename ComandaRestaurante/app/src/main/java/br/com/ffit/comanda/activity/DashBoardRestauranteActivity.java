@@ -1,10 +1,10 @@
 package br.com.ffit.comanda.activity;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,17 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.activity.fragment.ProdutoFragment;
 import br.com.ffit.comanda.activity.fragment.ProdutoFragment_;
+import br.com.ffit.comanda.to.EstabelecimentoTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_dash_board_restaurante)
@@ -42,6 +45,16 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
 
+    @Extra("estabelecimento")
+    EstabelecimentoTO estabelecimentoTO;
+
+    @ViewById(R.id.navDrawerEmail)
+    TextView navDrawerEmail;
+
+    @ViewById(R.id.navDrawerNome)
+    TextView navDrawerNome;
+
+
     @AfterViews
     public void afterViews() {
         setSupportActionBar(toolbar);
@@ -50,6 +63,8 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        navDrawerNome.setText(estabelecimentoTO.getNome());
+        navDrawerEmail.setText(estabelecimentoTO.getLogin());
     }
 
     @Click
@@ -81,8 +96,6 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
 
         if (id == R.id.nav_produto) {
             selected = ProdutoFragment_.builder().build();
-            Toast.makeText(this, "produtos", Toast.LENGTH_SHORT).show();
-
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
@@ -104,6 +117,6 @@ public class DashBoardRestauranteActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(String id) {
-
+        Toast.makeText(this, "Carregando Tela", Toast.LENGTH_SHORT).show();
     }
 }

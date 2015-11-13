@@ -4,6 +4,7 @@ package br.com.ffit.comanda.to;
 import java.math.BigDecimal;
 
 public class ProdutoTO {
+
     String Nome;
     String Descricao;
     BigDecimal preco;
