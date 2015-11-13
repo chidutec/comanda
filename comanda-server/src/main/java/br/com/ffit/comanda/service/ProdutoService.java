@@ -33,4 +33,8 @@ public class ProdutoService {
 			throw new BusinessException("Produto ja cadastrado com este nome");
 		}
 	}
+
+	public void excluirProduto(Long idProduto) {
+		produtoRepository.delete(idProduto);
+	}
 }

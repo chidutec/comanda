@@ -92,6 +92,7 @@ public class EstabelecimentoService {
 			produtoTO.setNome(produto.getNome());
 			produtoTO.setDescricao(produto.getDescricao());
 			produtoTO.setPreco(produto.getPreco());
+			produtoTO.setId(produto.getId());
 			produtosTO.add(produtoTO);
 		}
 		

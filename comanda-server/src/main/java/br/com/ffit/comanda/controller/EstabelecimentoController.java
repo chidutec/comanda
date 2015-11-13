@@ -64,5 +64,18 @@ public class EstabelecimentoController {
 	public @ResponseBody JSONResponse verificaDisponibilidadeLogin(@RequestBody LoginTO loginTO) {
 		return estabelecimentoService.verificaDisponibilidadeLogin(loginTO);
 	}
-
+	
+	@RequestMapping(value="/excluirProduto/{idProduto}", method = RequestMethod.DELETE)
+	public @ResponseBody JSONResponse excluirProduto(@PathVariable Long idProduto) {
+		JSONResponse jsonResponse = new JSONResponse();
+		try{
+			produtoService.excluirProduto(idProduto);
+			jsonResponse.setSuccess(true);
+			jsonResponse.setMessage("Produto excluido com sucesso");
+		} catch (Exception e) {
+			jsonResponse.setSuccess(false);
+			jsonResponse.setMessage("Erro ao excluir o produto");
+		}
+		return jsonResponse;
+	}
 }
