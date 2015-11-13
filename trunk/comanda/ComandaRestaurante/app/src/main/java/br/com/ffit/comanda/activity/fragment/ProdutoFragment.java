@@ -10,6 +10,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 import br.com.ffit.comanda.adapter.ProdutoTOListAdapter;
 import br.com.ffit.comanda.service.EstabelecimentoService;
+import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
 import ffit.com.br.comanda.R;
@@ -27,6 +29,9 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
 
     @ViewById(android.R.id.list)
     AbsListView mListView;
+
+    @FragmentArg
+    EstabelecimentoTO estabelecimentoTO;
 
     @Bean
     EstabelecimentoService estabelecimentoService;
@@ -43,14 +48,12 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
 
     @Background
     public void buscaProdutos() {
-        JSONResponse<List<ProdutoTO>> jsonResponse = estabelecimentoService.buscaProdutos(5L);
+        JSONResponse<List<ProdutoTO>> jsonResponse = estabelecimentoService.buscaProdutos(estabelecimentoTO.getId());
         callBackBuscaProdutos(jsonResponse);
     }
 
     @UiThread
     public void callBackBuscaProdutos(JSONResponse<List<ProdutoTO>> jsonResponse) {
-//        mAdapter = new ArrayAdapter<ProdutoTO>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, jsonResponse.getObj());
         produtoTOListAdapter.setProdutoTOs(jsonResponse.getObj());
         mListView.setAdapter(produtoTOListAdapter);
     }
