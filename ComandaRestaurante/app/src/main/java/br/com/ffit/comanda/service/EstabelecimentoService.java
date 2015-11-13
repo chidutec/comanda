@@ -39,4 +39,8 @@ public class EstabelecimentoService {
     public JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento) {
         return restClient.buscaProdutos(idEstabelecimento);
     }
+
+    public JSONResponse excluirProduto(Long idProduto) {
+        return restClient.excluirProduto(idProduto);
+    }
 }
