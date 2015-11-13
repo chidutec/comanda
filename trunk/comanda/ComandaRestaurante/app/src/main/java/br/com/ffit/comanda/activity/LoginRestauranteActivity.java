@@ -13,6 +13,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.service.EstabelecimentoService;
+import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.LoginTO;
 import ffit.com.br.comanda.R;
@@ -89,14 +90,14 @@ public class LoginRestauranteActivity extends Activity {
 
     @Background
     public void fazerLogin(LoginTO loginTO) {
-        JSONResponse jsonResponse = estabelecimentoService.fazerLogin(loginTO);
+        JSONResponse<EstabelecimentoTO> jsonResponse = estabelecimentoService.fazerLogin(loginTO);
         callBackFazerLogin(jsonResponse);
     }
 
     @UiThread
-    public void callBackFazerLogin(JSONResponse jsonResponse) {
+    public void callBackFazerLogin(JSONResponse<EstabelecimentoTO> jsonResponse) {
         if (jsonResponse.getSuccess()) {
-            DashBoardRestauranteActivity_.intent(this).start();
+            DashBoardRestauranteActivity_.intent(this).extra("estabelecimento", jsonResponse.getObj()).start();
         } else {
             Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
         }

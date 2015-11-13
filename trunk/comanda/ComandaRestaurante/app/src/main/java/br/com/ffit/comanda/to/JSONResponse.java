@@ -1,10 +1,11 @@
 package br.com.ffit.comanda.to;
 
 
-public class JSONResponse {
+public class JSONResponse<T> {
 
     Boolean success;
     String message;
+    T obj;
 
     public String getMessage() {
         return message;
@@ -20,5 +21,13 @@ public class JSONResponse {
 
     public void setSuccess(Boolean success) {
         this.success = success;
+    }
+
+    public T getObj() {
+        return obj;
+    }
+
+    public void setObj(T obj) {
+        this.obj = obj;
     }
 }

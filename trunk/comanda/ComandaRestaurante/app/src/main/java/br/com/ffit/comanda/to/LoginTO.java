@@ -1,6 +1,6 @@
 package br.com.ffit.comanda.to;
 
-public class LoginTO {
+public class LoginTO  {
 
 
     String login;
