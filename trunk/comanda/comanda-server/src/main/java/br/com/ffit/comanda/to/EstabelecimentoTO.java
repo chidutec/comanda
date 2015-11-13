@@ -1,8 +1,12 @@
 package br.com.ffit.comanda.to;
 
-public class EstabelecimentoTO {
+import java.io.Serializable;
 
-    String login;
+public class EstabelecimentoTO implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	String login;
     String senha;
     String nome;
 

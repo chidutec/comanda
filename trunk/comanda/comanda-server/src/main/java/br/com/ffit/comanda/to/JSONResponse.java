@@ -1,23 +1,32 @@
 package br.com.ffit.comanda.to;
 
-public class JSONResponse {
-	
-	Boolean success;
-	String message;
+public class JSONResponse<T> {
 
-	public String getMessage() {
-		return message;
-	}
+    Boolean success;
+    String message;
+    T obj;
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public Boolean getSuccess() {
-		return success;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public void setSuccess(Boolean success) {
-		this.success = success;
-	}
+    public Boolean getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(Boolean success) {
+        this.success = success;
+    }
+
+    public T getObj() {
+        return obj;
+    }
+
+    public void setObj(T obj) {
+        this.obj = obj;
+    }
 }
