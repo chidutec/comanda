@@ -1,5 +1,6 @@
 package br.com.ffit.comanda.rest;
 
+import org.androidannotations.annotations.rest.Delete;
 import org.androidannotations.annotations.rest.Get;
 import org.androidannotations.annotations.rest.Post;
 import org.androidannotations.annotations.rest.Rest;
@@ -29,5 +30,8 @@ public interface RestClient {
 
     @Get("/estabelecimento/buscaProdutos/{idEstabelecimento}")
     JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento);
+
+    @Delete("/estabelecimento/excluirProduto/{idProduto}")
+    JSONResponse excluirProduto(Long idProduto);
 
 }
