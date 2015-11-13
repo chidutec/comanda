@@ -6,11 +6,20 @@ public class EstabelecimentoTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
+	Long id;
 	String login;
     String senha;
     String nome;
 
-    public String getLogin() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getLogin() {
         return login;
     }
 
