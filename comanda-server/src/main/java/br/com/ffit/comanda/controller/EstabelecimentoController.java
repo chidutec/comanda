@@ -52,7 +52,7 @@ public class EstabelecimentoController {
 
 	@RequestMapping(value = "/cadastraEstabelecimento", method = RequestMethod.POST)
 	public @ResponseBody JSONResponse<EstabelecimentoTO> cadastraEstabelecimeto(@RequestBody EstabelecimentoTO estabelecimentoTO) {
-		return estabelecimentoService.inserirEstabelecimento(estabelecimentoTO);
+		return estabelecimentoService.cadatraEstabelecimento(estabelecimentoTO);
 	}
 	
 	@RequestMapping(value="/fazerLogin", method = RequestMethod.POST)
@@ -67,9 +67,8 @@ public class EstabelecimentoController {
 	
 	@RequestMapping(value="/excluirProduto/{idProduto}", method = RequestMethod.DELETE)
 	public @ResponseBody JSONResponse excluirProduto(@PathVariable Long idProduto) {
-		JSONResponse jsonResponse = new JSONResponse();
+		JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
 		try{
-			produtoService.excluirProduto(idProduto);
 			jsonResponse.setSuccess(true);
 			jsonResponse.setMessage("Produto excluido com sucesso");
 		} catch (Exception e) {
