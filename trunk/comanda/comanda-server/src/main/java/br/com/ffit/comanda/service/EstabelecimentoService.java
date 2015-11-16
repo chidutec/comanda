@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ffit.comanda.model.Estabelecimento;
 import br.com.ffit.comanda.model.Produto;
@@ -26,21 +27,31 @@ public class EstabelecimentoService {
 	ProdutoRepository produtoRepository;
 
 
-	public JSONResponse<EstabelecimentoTO> inserirEstabelecimento(
+	@Transactional
+	public JSONResponse<EstabelecimentoTO> cadatraEstabelecimento(
 			EstabelecimentoTO estabelecimentoTO) {
-		JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
-
-		Estabelecimento estabelecimento = new Estabelecimento();
-		estabelecimento.setLogin(estabelecimentoTO.getLogin());
-		estabelecimento.setSenha(estabelecimentoTO.getSenha());
-		estabelecimento.setNome(estabelecimentoTO.getNome());
-
-		Estabelecimento aux = estabelecimentoRepository.save(estabelecimento);
-		estabelecimentoTO.setId(aux.getId());
-		jsonResponse.setSuccess(true);
-		jsonResponse.setMessage("Estabelecimento criado");
-		jsonResponse.setObj(estabelecimentoTO);
-		return jsonResponse;
+		
+		LoginTO loginTO = new LoginTO();
+		loginTO.setLogin(estabelecimentoTO.getLogin());
+		JSONResponse verificaLoginResponse = verificaDisponibilidadeLogin(loginTO);
+		if(verificaLoginResponse.getSuccess()) {
+			JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
+			Estabelecimento estabelecimento = new Estabelecimento();
+			estabelecimento.setLogin(estabelecimentoTO.getLogin());
+			estabelecimento.setSenha(estabelecimentoTO.getSenha());
+			estabelecimento.setNome(estabelecimentoTO.getNome());
+	
+			Estabelecimento aux = estabelecimentoRepository.save(estabelecimento);
+			estabelecimentoTO.setId(aux.getId());
+			jsonResponse.setSuccess(true);
+			jsonResponse.setMessage("Estabelecimento criado");
+		
+			jsonResponse.setObj(estabelecimentoTO);
+		
+			return jsonResponse;
+		} else {
+			return verificaLoginResponse;
+		}
 	}
 
 	public JSONResponse<EstabelecimentoTO> fazerLogin(LoginTO loginTO) {
