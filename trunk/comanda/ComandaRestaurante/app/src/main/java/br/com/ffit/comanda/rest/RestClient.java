@@ -32,6 +32,9 @@ public interface RestClient {
     JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento);
 
     @Delete("/estabelecimento/excluirProduto/{idProduto}")
-    JSONResponse<EstabelecimentoTO> excluirProduto(Long idProduto);
+    JSONResponse excluirProduto(Long idProduto);
+
+    @Post("/estabelecimento/cadastraProduto")
+    JSONResponse cadastraProduto(ProdutoTO produtoTO);
 
 }
