@@ -27,20 +27,6 @@ public class EstabelecimentoController {
 	
 	@Autowired
 	private ProdutoService produtoService;
-
-	@RequestMapping(value = "/inserirProduto", method = RequestMethod.POST)
-	public @ResponseBody JSONResponse inserirProduto(@RequestBody ProdutoTO produtoTO) {
-		JSONResponse jsonResponse = new JSONResponse<ProdutoTO>();
-		try{
-			produtoService.inserirProduto(produtoTO);
-			jsonResponse.setSuccess(true);
-			jsonResponse.setMessage("Produto inserido");			
-		} catch(BusinessException e) {
-			jsonResponse.setSuccess(false);
-			jsonResponse.setMessage(e.getMessage());
-		}
-		return jsonResponse;
-	}
 	
 	@RequestMapping(value = "/buscaProdutos/{idEstabelecimento}",  method = RequestMethod.GET)
     public @ResponseBody JSONResponse<List<ProdutoTO>> buscaProdutos(@PathVariable Long idEstabelecimento) {
@@ -75,6 +61,20 @@ public class EstabelecimentoController {
 		} catch (Exception e) {
 			jsonResponse.setSuccess(false);
 			jsonResponse.setMessage("Erro ao excluir o produto");
+		}
+		return jsonResponse;
+	}
+	
+	@RequestMapping(value="/cadastraProduto", method = RequestMethod.POST)
+	public @ResponseBody JSONResponse cadastraProduto(@RequestBody ProdutoTO produtoTO) {
+		JSONResponse jsonResponse = new JSONResponse();
+		try {			
+			produtoService.cadastraProduto(produtoTO);
+			jsonResponse.setSuccess(true);
+			jsonResponse.setMessage("Produto cadastrado com sucesso");
+		} catch (BusinessException e) {
+			jsonResponse.setSuccess(false);
+			jsonResponse.setMessage(e.getMessage());
 		}
 		return jsonResponse;
 	}

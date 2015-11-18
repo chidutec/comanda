@@ -19,7 +19,7 @@ public class ProdutoService {
 	ProdutoRepository produtoRepository;
 	
 	@Transactional
-	public void inserirProduto(ProdutoTO produtoTO) throws BusinessException {
+	public void cadastraProduto(ProdutoTO produtoTO) throws BusinessException {
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setId(produtoTO.getIdEstabelecimento());
 		if(produtoRepository.findByNomeAndEstabelecimento(produtoTO.getNome(), estabelecimento) == null) {
