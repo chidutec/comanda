@@ -55,6 +55,7 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
     @UiThread
     public void callBackBuscaProdutos(JSONResponse<List<ProdutoTO>> jsonResponse) {
         produtoTOListAdapter.setProdutoTOs(jsonResponse.getObj());
+        produtoTOListAdapter.setEstabelecimentoTO(estabelecimentoTO);
         mListView.setAdapter(produtoTOListAdapter);
     }
 

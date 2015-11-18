@@ -26,21 +26,14 @@ public class EstabelecimentoService {
     }
 
     public JSONResponse<EstabelecimentoTO> cadastraEstabelecimento(EstabelecimentoTO estabelecimentoTO) {
-        LoginTO loginTO = new LoginTO();
-        loginTO.setLogin(estabelecimentoTO.getLogin());
-        JSONResponse jsonResponse = verificaDisponibilidadeLogin(loginTO);
-        if(jsonResponse.getSuccess()) {
-            return restClient.cadastraEstabelecimento(estabelecimentoTO);
-        } else {
-            return jsonResponse;
-        }
+        return restClient.cadastraEstabelecimento(estabelecimentoTO);
     }
 
     public JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento) {
         return restClient.buscaProdutos(idEstabelecimento);
     }
 
-    public JSONResponse excluirProduto(Long idProduto) {
+    public JSONResponse<EstabelecimentoTO> excluirProduto(Long idProduto) {
         return restClient.excluirProduto(idProduto);
     }
 }

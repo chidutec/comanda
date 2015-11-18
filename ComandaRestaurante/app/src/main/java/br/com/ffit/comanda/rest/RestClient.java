@@ -13,7 +13,7 @@ import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.LoginTO;
 import br.com.ffit.comanda.to.ProdutoTO;
 
-@Rest(rootUrl = "http://192.168.100.84:8080/comanda-server", converters = {MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = "http://192.168.1.102:8080/comanda-server", converters = {MappingJackson2HttpMessageConverter.class})
 public interface RestClient {
 
     @Post("/estabelecimento/inserirProduto")
@@ -32,6 +32,6 @@ public interface RestClient {
     JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento);
 
     @Delete("/estabelecimento/excluirProduto/{idProduto}")
-    JSONResponse excluirProduto(Long idProduto);
+    JSONResponse<EstabelecimentoTO> excluirProduto(Long idProduto);
 
 }
