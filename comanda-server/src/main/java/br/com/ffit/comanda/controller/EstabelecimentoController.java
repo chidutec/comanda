@@ -69,6 +69,7 @@ public class EstabelecimentoController {
 	public @ResponseBody JSONResponse excluirProduto(@PathVariable Long idProduto) {
 		JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
 		try{
+			produtoService.excluirProduto(idProduto);
 			jsonResponse.setSuccess(true);
 			jsonResponse.setMessage("Produto excluido com sucesso");
 		} catch (Exception e) {
