@@ -33,7 +33,11 @@ public class EstabelecimentoService {
         return restClient.buscaProdutos(idEstabelecimento);
     }
 
-    public JSONResponse<EstabelecimentoTO> excluirProduto(Long idProduto) {
+    public JSONResponse excluirProduto(Long idProduto) {
         return restClient.excluirProduto(idProduto);
+    }
+
+    public JSONResponse cadastraProduto(ProdutoTO produtoTO) {
+        return restClient.cadastraProduto(produtoTO);
     }
 }
