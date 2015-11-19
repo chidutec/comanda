@@ -2,12 +2,12 @@ package br.com.ffit.comanda.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.ffit.comanda.exception.BusinessException;
 import br.com.ffit.comanda.model.Usuario;
 import br.com.ffit.comanda.repository.UsuarioRepository;
-import br.com.ffit.comanda.to.JSONResponse;
-import br.com.ffit.comanda.to.LoginTO;
+import br.com.ffit.comanda.to.UserTO;
 
 @Service
 public class UsuarioService {
@@ -15,25 +15,16 @@ public class UsuarioService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 
-	public Usuario inserirUsuario(Usuario usuario) {
-		return usuarioRepository.save(usuario);
-	}
-
-	public JSONResponse fazerLogin(LoginTO loginTO) throws BusinessException{
-		Usuario usuario = usuarioRepository.findByLogin(loginTO.getLogin());
-		JSONResponse jsonResponse = new JSONResponse();
-		if(usuario != null) {
-			if(usuario.getSenha().equals(loginTO.getSenha())) {
-				jsonResponse.setSuccess(true);
-			} else {
-				jsonResponse.setSuccess(false);
-				jsonResponse.setMessage("Senha invalida");
-			}
-		} else {
-			jsonResponse.setSuccess(false);
-			jsonResponse.setMessage("Usuario nao cadastrado");
+	@Transactional
+	public void fazerLogin(UserTO userTO) throws BusinessException{
+		Usuario usuario = usuarioRepository.findByIdFacebook(userTO.getIdFacebook());
+		if(usuario == null) {
+			usuario = new Usuario();
+			usuario.setIdFacebook(userTO.getIdFacebook());
+			usuario.setFoto(userTO.getFoto());
+			usuario.setName(userTO.getName());
+			usuarioRepository.save(usuario);
 		}
-		return jsonResponse;
 	}
 	
 }
