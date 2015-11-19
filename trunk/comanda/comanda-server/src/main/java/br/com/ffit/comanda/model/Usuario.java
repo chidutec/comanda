@@ -3,6 +3,7 @@ package br.com.ffit.comanda.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,13 +21,15 @@ public class Usuario {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private String nome;
-	private String login;
-	private String senha;
+	private Long idFacebook;
+	private String name;
+	@Column(columnDefinition = "mediumblob")
+	private byte[] foto;
 
 	@Transient
-	@ManyToMany(cascade= CascadeType.ALL)
-	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = { @JoinColumn(name = "conta_id") })
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "conta_id") })
 	private Set<Conta> contas;
 
 	@Transient
@@ -41,20 +44,28 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public Long getIdFacebook() {
+		return idFacebook;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setIdFacebook(Long idFacebook) {
+		this.idFacebook = idFacebook;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getName() {
+		return name;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public byte[] getFoto() {
+		return foto;
+	}
+
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 
 	public Set<Conta> getContas() {
