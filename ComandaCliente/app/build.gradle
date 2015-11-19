@@ -1,0 +1,69 @@
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        url "http://repo1.maven.org/maven2/"
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
+    compile 'org.springframework.android:spring-android-rest-template:2.0.0.M1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1'
+    compile 'org.codehaus.jackson:jackson-core-asl:1.9.13'
+    compile 'org.androidannotations:androidannotations-api:3.3.2'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
+    //Dependências próprias
+    compile 'br.com.ffit:comanda-to:0.0.1-SNAPSHOT'
+    apt 'org.androidannotations:androidannotations:3.3.2'
+}
+
+apt {
+    arguments {
+        // Trocar depois quando descobrir a variavel pro manifest file
+        androidManifestFile 'C:/Users/Eduardo/AndroidStudioProjects/ComandaRestaurante/app/src/main/AndroidManifest.xml'
+        //androidManifestFile '/home/eduardo/AdnroidProjects/ComandaRestaurante/app/src/main/AndroidManifest.xml'
+        //androidManifestFile variant.outputs[0]?.processResources?.manifestFile
+        logLevel 'TRACE'
+        logAppenderConsole 'true'
+    }
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId "br.com.ffitcomanda"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+    }
+}
