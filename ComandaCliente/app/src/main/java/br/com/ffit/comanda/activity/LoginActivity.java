@@ -3,8 +3,7 @@ package br.com.ffit.comanda.activity;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.support.annotation.UiThread;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -18,31 +17,22 @@ import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
-import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-import br.com.ffit.comanda.service.EstabelecimentoService;
-import br.com.ffit.comanda.to.EstabelecimentoTO;
+import br.com.ffit.comanda.service.FacebookService;
+import br.com.ffit.comanda.service.UsuarioService;
 import br.com.ffit.comanda.to.JSONResponse;
-import br.com.ffit.comanda.to.LoginTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_login)
 public class LoginActivity extends Activity {
 
     @Bean
-    EstabelecimentoService estabelecimentoService;
+    UsuarioService usuarioService;
 
-    @ViewById(R.id.inputEmail)
-    EditText inputEmail;
-
-    @ViewById(R.id.inputSenha)
-    EditText inputSenha;
-
-    @ViewById(R.id.viewMessageLogin)
-    TextView viewMessageLogin;
+    @Bean
+    FacebookService facebookService;
 
     @ViewById(R.id.btnLogin)
     LoginButton btnLogin;
@@ -57,7 +47,6 @@ public class LoginActivity extends Activity {
         callbackManager = CallbackManager.Factory.create();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -65,11 +54,12 @@ public class LoginActivity extends Activity {
     }
 
     @AfterViews
-    public void setPermissions() {
+    public void registerLoginButton() {
         btnLogin.setReadPermissions("user_friends");
         btnLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
+                fazerLogin();
                 Toast.makeText(getApplicationContext(), "Sucesso", Toast.LENGTH_SHORT).show();
             }
 
@@ -83,6 +73,19 @@ public class LoginActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Background
+    public void fazerLogin() {
+        JSONResponse jsonResponse = usuarioService.fazerLogin();
+        callBackFazerLogin(jsonResponse);
+    }
+
+    @UiThread
+    public  void callBackFazerLogin(JSONResponse jsonResponse) {
+         if(jsonResponse.getSuccess()) {
+           // DashBoardClienteActivity_.intent(this).extra("userTO", userTO).start();
+         }
     }
 
 //    @Click
@@ -108,53 +111,20 @@ public class LoginActivity extends Activity {
 //        fazerLogin(loginTO);
 //    }
 
-    @Click
-    public void btnCadastrar() {
-        String login = inputEmail.getText().toString();
+//    @Click
+//    public void btnCadastrar() {
+//        String login = inputEmail.getText().toString();
+//
+//        //Caso o campo login esteja preenchido, verificar disponibilidade. Se não apenas abrir a próxima tela
+//        if (!login.isEmpty()) {
+//            LoginTO loginTO = new LoginTO();
+//            loginTO.setLogin(login);
+//            progressDialog = ProgressDialog.show(this, "Verificando Disponibilidade do Login", "Aguarde", true);
+//            verificaDisponibilidadeLogin(loginTO);
+//        } else {
+//            CadastroRestauranteActivity_.intent(this).start();
+//        }
+//    }
 
-        //Caso o campo login esteja preenchido, verificar disponibilidade. Se não apenas abrir a próxima tela
-        if (!login.isEmpty()) {
-            LoginTO loginTO = new LoginTO();
-            loginTO.setLogin(login);
-            progressDialog = ProgressDialog.show(this, "Verificando Disponibilidade do Login", "Aguarde", true);
-            verificaDisponibilidadeLogin(loginTO);
-        } else {
-            CadastroRestauranteActivity_.intent(this).start();
-        }
-    }
-
-    @Background
-    public void verificaDisponibilidadeLogin(LoginTO loginTO) {
-        //Inicia serviço que verifica disponibilidade do login no servidor
-        JSONResponse jsonResponse = estabelecimentoService.verificaDisponibilidadeLogin(loginTO);
-        callBackVerificaDisponibilidadeLogin(jsonResponse, loginTO);
-    }
-
-    @UiThread
-    public void callBackVerificaDisponibilidadeLogin(JSONResponse jsonResponse, LoginTO loginTo) {
-        //Caso login nao exista, passar para próximo tela com ele de parametro
-        progressDialog.dismiss();
-        if (jsonResponse.getSuccess()) {
-            CadastroRestauranteActivity_.intent(this).extra("login", loginTo.getLogin()).start();
-        } else {
-            Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Background
-    public void fazerLogin(LoginTO loginTO) {
-        JSONResponse<EstabelecimentoTO> jsonResponse = estabelecimentoService.fazerLogin(loginTO);
-        callBackFazerLogin(jsonResponse);
-    }
-
-    @UiThread
-    public void callBackFazerLogin(JSONResponse<EstabelecimentoTO> jsonResponse) {
-        progressDialog.dismiss();
-        if (jsonResponse.getSuccess()) {
-            DashBoardClienteActivity_.intent(this).extra("estabelecimentoTO", jsonResponse.getObj()).start();
-        } else {
-            Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
 
 }
