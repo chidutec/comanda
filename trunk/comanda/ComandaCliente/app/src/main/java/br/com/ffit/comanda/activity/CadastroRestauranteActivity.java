@@ -6,17 +6,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
-import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
-import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.service.EstabelecimentoService;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
-import br.com.ffit.comanda.to.JSONResponse;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_cadastro_restaurante)
@@ -72,24 +69,24 @@ public class CadastroRestauranteActivity extends Activity {
         estabelecimentoTO.setNome(nome);
 
         progressDialog = ProgressDialog.show(this, "Cadastrando", "Aguarde", true);
-        cadastraEstabelecimento(estabelecimentoTO);
+//        cadastraEstabelecimento(estabelecimentoTO);
 
     }
-
-    @Background
-    public void cadastraEstabelecimento(EstabelecimentoTO estabelecimentoTO) {
-        JSONResponse<EstabelecimentoTO> jsonResponse = estabelecimentoService.cadastraEstabelecimento(estabelecimentoTO);
-        callbackCadastraEstabelecimento(jsonResponse);
-    }
-
-    @UiThread
-    public void callbackCadastraEstabelecimento(JSONResponse<EstabelecimentoTO> jsonResponse) {
-        progressDialog.dismiss();
-        Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
-        if(jsonResponse.getSuccess()) {
-            DashBoardClienteActivity_.intent(this).extra("estabelecimentoTO", jsonResponse.getObj()).start();
-        }
-    }
+//
+//    @Background
+//    public void cadastraEstabelecimento(EstabelecimentoTO estabelecimentoTO) {
+//        JSONResponse<EstabelecimentoTO> jsonResponse = estabelecimentoService.cadastraEstabelecimento(estabelecimentoTO);
+//        callbackCadastraEstabelecimento(jsonResponse);
+//    }
+//
+//    @UiThread
+//    public void callbackCadastraEstabelecimento(JSONResponse<EstabelecimentoTO> jsonResponse) {
+//        progressDialog.dismiss();
+//        Toast.makeText(this, jsonResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//        if(jsonResponse.getSuccess()) {
+//            DashBoardClienteActivity_.intent(this).extra("estabelecimentoTO", jsonResponse.getObj()).start();
+//        }
+//    }
 
 }
 
