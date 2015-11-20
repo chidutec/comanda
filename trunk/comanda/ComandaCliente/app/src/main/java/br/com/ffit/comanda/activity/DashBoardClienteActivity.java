@@ -9,8 +9,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
@@ -20,8 +23,7 @@ import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.activity.fragment.ProdutoFragment;
-import br.com.ffit.comanda.activity.fragment.ProdutoFragment_;
-import br.com.ffit.comanda.to.EstabelecimentoTO;
+import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_dash_board_restaurante)
@@ -38,14 +40,17 @@ public class DashBoardClienteActivity extends AppCompatActivity
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
 
-    @Extra("estabelecimentoTO")
-    EstabelecimentoTO estabelecimentoTO;
+    @Extra("usuarioTO")
+    UsuarioTO usuarioTO;
 
     @ViewById(R.id.navDrawerEmail)
     TextView navDrawerEmail;
 
     @ViewById(R.id.navDrawerNome)
     TextView navDrawerNome;
+
+    @ViewById(R.id.navDrawerPicture)
+    ImageView navDrawePicture;
 
 
     @AfterViews
@@ -56,8 +61,9 @@ public class DashBoardClienteActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navDrawerNome.setText(estabelecimentoTO.getNome());
-        navDrawerEmail.setText(estabelecimentoTO.getLogin());
+        navDrawerNome.setText(usuarioTO.getNome());
+        navDrawerEmail.setText(usuarioTO.getEmail());
+        Picasso.with(this).load(usuarioTO.getFotoUrl()).into(navDrawePicture);
     }
 
     @Override
@@ -82,7 +88,7 @@ public class DashBoardClienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_produto) {
-            selected = ProdutoFragment_.builder().estabelecimentoTO(estabelecimentoTO).build();
+  //          selected = ProdutoFragment_.builder().estabelecimentoTO(estabelecimentoTO).build();
         } else if (id == R.id.nav_logout) {
             finish();
         }

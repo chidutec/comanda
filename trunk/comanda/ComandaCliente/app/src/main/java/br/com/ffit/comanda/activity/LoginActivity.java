@@ -23,6 +23,7 @@ import org.androidannotations.annotations.ViewById;
 import br.com.ffit.comanda.service.FacebookService;
 import br.com.ffit.comanda.service.UsuarioService;
 import br.com.ffit.comanda.to.JSONResponse;
+import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_login)
@@ -55,7 +56,7 @@ public class LoginActivity extends Activity {
 
     @AfterViews
     public void registerLoginButton() {
-        btnLogin.setReadPermissions("user_friends");
+        btnLogin.setReadPermissions("user_friends","email");
         btnLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -77,14 +78,14 @@ public class LoginActivity extends Activity {
 
     @Background
     public void fazerLogin() {
-        JSONResponse jsonResponse = usuarioService.fazerLogin();
+        JSONResponse<UsuarioTO> jsonResponse = usuarioService.fazerLogin();
         callBackFazerLogin(jsonResponse);
     }
 
     @UiThread
-    public  void callBackFazerLogin(JSONResponse jsonResponse) {
+    public  void callBackFazerLogin(JSONResponse<UsuarioTO> jsonResponse) {
          if(jsonResponse.getSuccess()) {
-           // DashBoardClienteActivity_.intent(this).extra("userTO", userTO).start();
+            DashBoardClienteActivity_.intent(this).extra("usuarioTO", jsonResponse.getObj()).start();
          }
     }
 

@@ -21,6 +21,7 @@ dependencies {
     compile 'org.androidannotations:androidannotations-api:3.3.2'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
     compile 'org.apache.commons:commons-io:1.3.2'
+    compile 'com.squareup.picasso:picasso:2.5.2'
     //Dependências próprias
     compile 'br.com.ffit:comanda-to:0.0.1-SNAPSHOT'
     apt 'org.androidannotations:androidannotations:3.3.2'
@@ -29,8 +30,8 @@ dependencies {
 apt {
     arguments {
         // Trocar depois quando descobrir a variavel pro manifest file
-        //androidManifestFile 'C:/Users/Eduardo/AndroidStudioProjects/ComandaCliente/app/src/main/AndroidManifest.xml'
-        androidManifestFile '/home/eduardo/AdnroidProjects/ComandaCliente/app/src/main/AndroidManifest.xml'
+        androidManifestFile 'C:/Users/Eduardo/AndroidStudioProjects/ComandaCliente/app/src/main/AndroidManifest.xml'
+        //androidManifestFile '/home/eduardo/AdnroidProjects/ComandaCliente/app/src/main/AndroidManifest.xml'
         //androidManifestFile variant.outputs[0]?.processResources?.manifestFile
         logLevel 'TRACE'
         logAppenderConsole 'true'
