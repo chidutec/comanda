@@ -2,14 +2,13 @@ package br.com.ffit.comanda.activity.fragment;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
-import android.view.View;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
+import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterInject;
-import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.UiThread;
@@ -18,15 +17,18 @@ import org.androidannotations.annotations.ViewById;
 import java.util.List;
 
 import br.com.ffit.comanda.adapter.ProdutoTOListAdapter;
+import br.com.ffit.comanda.service.ContaService;
 import br.com.ffit.comanda.service.EstabelecimentoService;
+import br.com.ffit.comanda.to.AbrirContaTO;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
+import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 
 @EFragment(R.layout.fragment_produto)
-public class ProdutoFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class ProdutoFragment extends Fragment {
 
     @ViewById(android.R.id.list)
     AbsListView mListView;
@@ -34,11 +36,17 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
     @FragmentArg
     EstabelecimentoTO estabelecimentoTO;
 
+    @FragmentArg
+    UsuarioTO usuarioTO;
+
     @Bean
     EstabelecimentoService estabelecimentoService;
 
     @Bean
     ProdutoTOListAdapter produtoTOListAdapter;
+
+    @Bean
+    ContaService contaService;
 
     private OnFragmentInteractionListener mListener;
 
@@ -61,19 +69,27 @@ public class ProdutoFragment extends Fragment implements AbsListView.OnItemClick
         mListView.setAdapter(produtoTOListAdapter);
     }
 
-    @AfterViews
-    public void afterViews() {
-        mListView.setOnItemClickListener(this);
+    @Click
+    public void btnAbrirConta() {
+        AbrirContaTO abrirContaTO = new AbrirContaTO();
+        abrirContaTO.setIdUsuario(usuarioTO.getId());
+        abrirContaTO.setIdEstabelecimento(estabelecimentoTO.getId());
+        abrirConta(abrirContaTO);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        if (null != mListener) {
-//            // Notify the active callbacks interface (the activity, if the
-//            // fragment is attached to one) that an item has been selected.
-//            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-//        }
+    @Background
+    public void abrirConta(AbrirContaTO abrirContaTO) {
+       JSONResponse jsonResponse = contaService.abrirConta(abrirContaTO);
+       callBackAbrirConta(jsonResponse);
     }
+
+    @UiThread
+    public void callBackAbrirConta(JSONResponse jsonResponse) {
+        if(jsonResponse.getSuccess()) {
+            Toast.makeText(this.getActivity(), "Conta aberta", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     //Interagir com outros fragmentos
     public interface OnFragmentInteractionListener {

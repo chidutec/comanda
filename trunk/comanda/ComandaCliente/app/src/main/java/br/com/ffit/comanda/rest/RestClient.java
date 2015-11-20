@@ -7,6 +7,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 
 import java.util.List;
 
+import br.com.ffit.comanda.to.AbrirContaTO;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
@@ -23,5 +24,8 @@ public interface RestClient {
 
     @Get("/estabelecimento/buscaProdutos/{idEstabelecimento}")
     JSONResponse<List<ProdutoTO>> buscaProdutos(Long idEstabelecimento);
+
+    @Post("/conta/abrirConta")
+    JSONResponse abrirConta(AbrirContaTO abrirContaTO);
 
 }
