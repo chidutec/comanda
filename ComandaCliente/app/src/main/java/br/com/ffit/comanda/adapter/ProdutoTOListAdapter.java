@@ -10,7 +10,6 @@ import org.androidannotations.annotations.RootContext;
 
 import java.util.List;
 
-import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.ProdutoTO;
 import br.com.ffit.comanda.view.ProdutoTOItemView;
 import br.com.ffit.comanda.view.ProdutoTOItemView_;
@@ -19,8 +18,6 @@ import br.com.ffit.comanda.view.ProdutoTOItemView_;
 public class ProdutoTOListAdapter extends BaseAdapter {
 
     private List<ProdutoTO> produtoTOs;
-
-    private EstabelecimentoTO estabelecimentoTO;
 
     @RootContext
     Context context;
@@ -35,7 +32,7 @@ public class ProdutoTOListAdapter extends BaseAdapter {
             produtoItemView = (ProdutoTOItemView) convertView;
         }
 
-        produtoItemView.bind(getItem(position), estabelecimentoTO);
+        produtoItemView.bind(getItem(position));
 
         return produtoItemView;
     }
@@ -63,10 +60,6 @@ public class ProdutoTOListAdapter extends BaseAdapter {
 
     public void setProdutoTOs(List<ProdutoTO> produtoTOs) {
         this.produtoTOs = produtoTOs;
-    }
-
-    public void setEstabelecimentoTO(EstabelecimentoTO estabelecimentoTO) {
-        this.estabelecimentoTO = estabelecimentoTO;
     }
 
 }

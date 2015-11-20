@@ -22,14 +22,15 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import br.com.ffit.comanda.activity.fragment.ProdutoFragment;
+import br.com.ffit.comanda.activity.fragment.RestauranteFragment;
+import br.com.ffit.comanda.activity.fragment.RestauranteFragment_;
 import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 @EActivity(R.layout.activity_dash_board_restaurante)
 @OptionsMenu({R.menu.dash_board_restaurante})
 public class DashBoardClienteActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ProdutoFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, RestauranteFragment.OnFragmentInteractionListener{
 
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
@@ -88,7 +89,7 @@ public class DashBoardClienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_produto) {
-  //          selected = ProdutoFragment_.builder().estabelecimentoTO(estabelecimentoTO).build();
+            selected = RestauranteFragment_.builder().build();
         } else if (id == R.id.nav_logout) {
             finish();
         }
