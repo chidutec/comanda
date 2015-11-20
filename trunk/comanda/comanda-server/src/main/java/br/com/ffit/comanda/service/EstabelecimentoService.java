@@ -21,33 +21,45 @@ public class EstabelecimentoService {
 
 	@Autowired
 	EstabelecimentoRepository estabelecimentoRepository;
-	
 
 	@Autowired
 	ProdutoRepository produtoRepository;
 
+	public List<EstabelecimentoTO> buscaRestaurantes() {
+		List<Estabelecimento> estabelecimentos = estabelecimentoRepository
+				.findAll();
+		List<EstabelecimentoTO> estabelecimentoTOs = new ArrayList<EstabelecimentoTO>();
+		for(Estabelecimento estabelecimento : estabelecimentos) {
+			EstabelecimentoTO estabelecimentoTO = new EstabelecimentoTO();
+			estabelecimentoTO.setId(estabelecimento.getId());
+			estabelecimentoTO.setNome(estabelecimento.getNome());
+			estabelecimentoTOs.add(estabelecimentoTO);
+		}
+		return estabelecimentoTOs;
+	}
 
 	@Transactional
 	public JSONResponse<EstabelecimentoTO> cadatraEstabelecimento(
 			EstabelecimentoTO estabelecimentoTO) {
-		
+
 		LoginTO loginTO = new LoginTO();
 		loginTO.setLogin(estabelecimentoTO.getLogin());
 		JSONResponse verificaLoginResponse = verificaDisponibilidadeLogin(loginTO);
-		if(verificaLoginResponse.getSuccess()) {
+		if (verificaLoginResponse.getSuccess()) {
 			JSONResponse<EstabelecimentoTO> jsonResponse = new JSONResponse<EstabelecimentoTO>();
 			Estabelecimento estabelecimento = new Estabelecimento();
 			estabelecimento.setLogin(estabelecimentoTO.getLogin());
 			estabelecimento.setSenha(estabelecimentoTO.getSenha());
 			estabelecimento.setNome(estabelecimentoTO.getNome());
-	
-			Estabelecimento aux = estabelecimentoRepository.save(estabelecimento);
+
+			Estabelecimento aux = estabelecimentoRepository
+					.save(estabelecimento);
 			estabelecimentoTO.setId(aux.getId());
 			jsonResponse.setSuccess(true);
 			jsonResponse.setMessage("Estabelecimento criado");
-		
+
 			jsonResponse.setObj(estabelecimentoTO);
-		
+
 			return jsonResponse;
 		} else {
 			return verificaLoginResponse;
@@ -60,7 +72,7 @@ public class EstabelecimentoService {
 				.findByLogin(loginTO.getLogin());
 		if (estabelecimento != null) {
 			if (estabelecimento.getSenha().equals(loginTO.getSenha())) {
-				EstabelecimentoTO estabelecimentoTO  = new EstabelecimentoTO();
+				EstabelecimentoTO estabelecimentoTO = new EstabelecimentoTO();
 				estabelecimentoTO.setLogin(estabelecimento.getLogin());
 				estabelecimentoTO.setNome(estabelecimento.getNome());
 				estabelecimentoTO.setSenha(estabelecimento.getSenha());
@@ -94,11 +106,12 @@ public class EstabelecimentoService {
 	public List<ProdutoTO> buscaProdutos(Long idEstabelecimento) {
 		Estabelecimento estabelecimento = new Estabelecimento();
 		estabelecimento.setId(idEstabelecimento);
-		
-		List<Produto> produtos = produtoRepository.findByEstabelecimento(estabelecimento);
-				
+
+		List<Produto> produtos = produtoRepository
+				.findByEstabelecimento(estabelecimento);
+
 		List<ProdutoTO> produtosTO = new ArrayList<ProdutoTO>();
-		for(Produto produto: produtos) {
+		for (Produto produto : produtos) {
 			ProdutoTO produtoTO = new ProdutoTO();
 			produtoTO.setNome(produto.getNome());
 			produtoTO.setDescricao(produto.getDescricao());
@@ -106,7 +119,7 @@ public class EstabelecimentoService {
 			produtoTO.setId(produto.getId());
 			produtosTO.add(produtoTO);
 		}
-		
+
 		return produtosTO;
 	}
 
