@@ -3,7 +3,7 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_produto" android:icon="@android:drawable/ic_menu_camera"
-            android:title="Produtos" />
+            android:title="Lista de Restaurantes" />
     </group>
 
     <item android:title="Conta">
