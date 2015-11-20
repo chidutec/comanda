@@ -3,7 +3,6 @@ package br.com.ffit.comanda.model;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -22,9 +21,9 @@ public class Usuario {
 	@GeneratedValue
 	private Long id;
 	private Long idFacebook;
-	private String name;
-	@Column(columnDefinition = "mediumblob")
-	private byte[] foto;
+	private String nome;
+	private String email;
+	private String fotoUrl;
 
 	@Transient
 	@ManyToMany(cascade = CascadeType.ALL)
@@ -52,20 +51,30 @@ public class Usuario {
 		this.idFacebook = idFacebook;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public byte[] getFoto() {
-		return foto;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
+
+	public String getFotoUrl() {
+		return fotoUrl;
+	}
+
+	public void setFotoUrl(String fotoUrl) {
+		this.fotoUrl = fotoUrl;
 	}
 
 	public Set<Conta> getContas() {
