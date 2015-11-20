@@ -6,7 +6,7 @@ import org.androidannotations.annotations.rest.RestService;
 
 import br.com.ffit.comanda.rest.RestClient;
 import br.com.ffit.comanda.to.JSONResponse;
-import br.com.ffit.comanda.to.UserTO;
+import br.com.ffit.comanda.to.UsuarioTO;
 
 @EBean
 public class UsuarioService {
@@ -17,9 +17,9 @@ public class UsuarioService {
     @Bean
     FacebookService facebookService;
 
-    public JSONResponse fazerLogin() {
-        UserTO userTO = facebookService.getUserInfo();
-        return restClient.fazerLogin(userTO);
+    public JSONResponse<UsuarioTO> fazerLogin() {
+        UsuarioTO usuarioTO = facebookService.getUserInfo();
+        return restClient.fazerLogin(usuarioTO);
     }
 
 
