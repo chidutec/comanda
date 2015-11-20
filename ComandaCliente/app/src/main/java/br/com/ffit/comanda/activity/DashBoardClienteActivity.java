@@ -89,7 +89,7 @@ public class DashBoardClienteActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_produto) {
-            selected = RestauranteFragment_.builder().build();
+            selected = RestauranteFragment_.builder().usuarioTO(usuarioTO).build();
         } else if (id == R.id.nav_logout) {
             finish();
         }
