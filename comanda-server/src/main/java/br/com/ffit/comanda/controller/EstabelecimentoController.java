@@ -28,6 +28,14 @@ public class EstabelecimentoController {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	@RequestMapping(value = "/buscaRestaurantes")
+	public @ResponseBody JSONResponse<List<EstabelecimentoTO>> buscaRestaurantes() {
+		JSONResponse<List<EstabelecimentoTO>> jsonResponse = new JSONResponse<List<EstabelecimentoTO>>();
+		jsonResponse.setObj(estabelecimentoService.buscaRestaurantes());
+		jsonResponse.setSuccess(true);
+		return jsonResponse;
+	}
+	
 	@RequestMapping(value = "/buscaProdutos/{idEstabelecimento}",  method = RequestMethod.GET)
     public @ResponseBody JSONResponse<List<ProdutoTO>> buscaProdutos(@PathVariable Long idEstabelecimento) {
 		JSONResponse<List<ProdutoTO>> jsonResponse = new JSONResponse<List<ProdutoTO>>();
