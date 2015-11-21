@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_produto" android:icon="@android:drawable/ic_menu_camera"
+        <item android:id="@+id/nav_restaurante" android:icon="@android:drawable/ic_menu_camera"
             android:title="Restaurantes" />
         <item android:id="@+id/nav_conta" android:icon="@android:drawable/ic_lock_idle_low_battery"
             android:title="Contas" />

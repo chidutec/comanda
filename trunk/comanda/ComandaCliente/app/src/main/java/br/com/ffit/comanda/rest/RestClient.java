@@ -19,6 +19,9 @@ public interface RestClient {
     @Post("/usuario/fazerLogin")
     JSONResponse<UsuarioTO> fazerLogin(UsuarioTO usuarioTO);
 
+    @Get("/usuario/buscaUsuarioPeloIdFacebook/{idFacebook}")
+    JSONResponse<UsuarioTO> buscaUsuarioPeloIdFacebook(Long idFacebook);
+
     @Get("/estabelecimento/buscaRestaurantes")
     JSONResponse<List<EstabelecimentoTO>> buscaRestaurantes();
 

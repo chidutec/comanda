@@ -13,17 +13,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
 import br.com.ffit.comanda.activity.fragment.RestauranteFragment;
 import br.com.ffit.comanda.activity.fragment.RestauranteFragment_;
+import br.com.ffit.comanda.global.GlobalClass;
 import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
@@ -41,9 +43,6 @@ public class DashBoardClienteActivity extends AppCompatActivity
     @ViewById(R.id.nav_view)
     NavigationView navigationView;
 
-    @Extra("usuarioTO")
-    UsuarioTO usuarioTO;
-
     @ViewById(R.id.navDrawerEmail)
     TextView navDrawerEmail;
 
@@ -53,6 +52,8 @@ public class DashBoardClienteActivity extends AppCompatActivity
     @ViewById(R.id.navDrawerPicture)
     ImageView navDrawePicture;
 
+    @App
+    GlobalClass globalClass;
 
     @AfterViews
     public void afterViews() {
@@ -62,9 +63,11 @@ public class DashBoardClienteActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        navDrawerNome.setText(usuarioTO.getNome());
-        navDrawerEmail.setText(usuarioTO.getEmail());
-        Picasso.with(this).load(usuarioTO.getFotoUrl()).into(navDrawePicture);
+
+        UsuarioTO usuarioLogado = globalClass.getUsuarioLogado();
+        navDrawerNome.setText(usuarioLogado.getNome());
+        navDrawerEmail.setText(usuarioLogado.getEmail());
+        Picasso.with(this).load(usuarioLogado.getFotoUrl()).into(navDrawePicture);
     }
 
     @Override
@@ -88,9 +91,11 @@ public class DashBoardClienteActivity extends AppCompatActivity
         Fragment selected = new Fragment();
         int id = item.getItemId();
 
-        if (id == R.id.nav_produto) {
-            selected = RestauranteFragment_.builder().usuarioTO(usuarioTO).build();
+        if (id == R.id.nav_restaurante) {
+            selected = RestauranteFragment_.builder().build();
         } else if (id == R.id.nav_logout) {
+            LoginManager.getInstance().logOut();
+            LoginActivity_.intent(this).start();
             finish();
         }
 
