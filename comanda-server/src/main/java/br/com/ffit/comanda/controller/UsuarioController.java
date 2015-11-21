@@ -20,7 +20,7 @@ public class UsuarioController {
 	
 	@RequestMapping(value="/fazerLogin", method = RequestMethod.POST)
 	public @ResponseBody JSONResponse<UsuarioTO> fazerLogin(@RequestBody UsuarioTO usuarioTO) {
-		usuarioService.fazerLogin(usuarioTO);
+		usuarioTO = usuarioService.fazerLogin(usuarioTO);
 		JSONResponse<UsuarioTO> jsonResponse = new JSONResponse<UsuarioTO>();
 		jsonResponse.setSuccess(true);
 		jsonResponse.setObj(usuarioTO);

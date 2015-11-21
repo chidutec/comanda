@@ -7,5 +7,7 @@ import br.com.ffit.comanda.model.Usuario;
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 	
 	Usuario findByIdFacebook(Long idFacebook);
+	
+	Usuario findById(Long id);
 
 }

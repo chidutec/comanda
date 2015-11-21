@@ -16,7 +16,7 @@ public class UsuarioService {
 	UsuarioRepository usuarioRepository;
 
 	@Transactional
-	public void fazerLogin(UsuarioTO usuarioTO) throws BusinessException {
+	public UsuarioTO fazerLogin(UsuarioTO usuarioTO) throws BusinessException {
 		Usuario usuario = usuarioRepository.findByIdFacebook(usuarioTO.getIdFacebook()); 
 		if(usuario == null) {
 			usuario = new Usuario();
@@ -25,7 +25,10 @@ public class UsuarioService {
 		usuario.setEmail(usuarioTO.getEmail());
 		usuario.setFotoUrl(usuarioTO.getFotoUrl());
 		usuario.setNome(usuarioTO.getNome());
-		usuarioRepository.save(usuario);
+		usuario = usuarioRepository.save(usuario);
+		
+		usuarioTO.setId(usuario.getId());
+		return usuarioTO;
 	}
 
 }

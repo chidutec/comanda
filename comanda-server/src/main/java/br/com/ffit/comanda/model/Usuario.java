@@ -25,8 +25,7 @@ public class Usuario {
 	private String email;
 	private String fotoUrl;
 
-	@Transient
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "conta_id") })
 	private Set<Conta> contas;

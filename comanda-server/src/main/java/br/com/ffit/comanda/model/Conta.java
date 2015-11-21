@@ -30,12 +30,10 @@ public class Conta {
 	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
 	private Set<Item> itens;
 
-	@Transient
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "conta_id") }, inverseJoinColumns = { @JoinColumn(name = "usuario_id") })
 	private Set<Usuario> usuarios;
 
-	@Transient
 	@ManyToOne
 	private Estabelecimento estabelecimento;
 
