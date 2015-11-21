@@ -10,8 +10,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 @Entity
 @Table(name = "estabelecimento")
 public class Estabelecimento {
@@ -24,11 +22,9 @@ public class Estabelecimento {
 	private String senha;
 	private String nome;
 	
-	@Transient
 	@OneToMany(mappedBy = "estabelecimento", cascade = CascadeType.ALL)
 	private Set<Conta> contas;
 	
-	@Transient
 	@OneToMany(mappedBy = "estabelecimento", cascade = CascadeType.ALL)
 	private Set<Produto> produtos;
 	

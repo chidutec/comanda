@@ -11,4 +11,6 @@ public interface EstabelecimentoRepository extends CrudRepository<Estabeleciment
 	Estabelecimento findByLogin(String login);
 	
 	List<Estabelecimento> findAll();
+	
+	Estabelecimento findById(Long id);
 }
