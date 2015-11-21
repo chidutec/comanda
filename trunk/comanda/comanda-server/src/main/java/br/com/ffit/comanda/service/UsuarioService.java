@@ -31,4 +31,15 @@ public class UsuarioService {
 		return usuarioTO;
 	}
 
+	public UsuarioTO buscaUsuarioPeloIdFacebook(Long idFacebook) {
+		Usuario usuario = usuarioRepository.findByIdFacebook(idFacebook); 
+		UsuarioTO usuarioTO = new UsuarioTO();
+		usuarioTO.setId(usuario.getId());
+		usuarioTO.setEmail(usuario.getEmail());
+		usuarioTO.setNome(usuario.getNome());
+		usuarioTO.setIdFacebook(usuario.getIdFacebook());
+		usuarioTO.setFotoUrl(usuario.getFotoUrl());
+		return usuarioTO;
+	}
+
 }
