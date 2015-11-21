@@ -15,7 +15,6 @@ import java.util.List;
 import br.com.ffit.comanda.activity.DashBoardClienteActivity;
 import br.com.ffit.comanda.activity.fragment.ProdutoFragment_;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
-import br.com.ffit.comanda.to.UsuarioTO;
 import br.com.ffit.comanda.view.EstabelecimentoTOItemView;
 import br.com.ffit.comanda.view.EstabelecimentoTOItemView_;
 import ffit.com.br.comanda.R;
@@ -24,8 +23,6 @@ import ffit.com.br.comanda.R;
 public class EstabelecimentoTOListAdapter extends BaseAdapter {
 
     private List<EstabelecimentoTO> estabelecimentoTOs;
-
-    private UsuarioTO usuarioTO;
 
     @RootContext
     Context context;
@@ -44,7 +41,7 @@ public class EstabelecimentoTOListAdapter extends BaseAdapter {
 
         estabelecimentoTOItemView.setOnClickListener(item -> {
             FragmentManager fragmentManager = ((DashBoardClienteActivity) context).getFragmentManager();
-            Fragment fragment = ProdutoFragment_.builder().estabelecimentoTO(((EstabelecimentoTOItemView) item).getEstabelecimentoTO()).usuarioTO(usuarioTO).build();
+            Fragment fragment = ProdutoFragment_.builder().estabelecimentoTO(((EstabelecimentoTOItemView) item).getEstabelecimentoTO()).build();
             fragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment).commit();
         });
 
@@ -74,14 +71,6 @@ public class EstabelecimentoTOListAdapter extends BaseAdapter {
 
     public void setEstabelecimentoTOs(List<EstabelecimentoTO> estabelecimentoTOs) {
         this.estabelecimentoTOs = estabelecimentoTOs;
-    }
-
-    public UsuarioTO getUsuarioTO() {
-        return usuarioTO;
-    }
-
-    public void setUsuarioTO(UsuarioTO usuarioTO) {
-        this.usuarioTO = usuarioTO;
     }
 
 }

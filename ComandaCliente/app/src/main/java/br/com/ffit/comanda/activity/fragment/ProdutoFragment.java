@@ -6,6 +6,7 @@ import android.widget.AbsListView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterInject;
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
@@ -17,13 +18,13 @@ import org.androidannotations.annotations.ViewById;
 import java.util.List;
 
 import br.com.ffit.comanda.adapter.ProdutoTOListAdapter;
+import br.com.ffit.comanda.global.GlobalClass;
 import br.com.ffit.comanda.service.ContaService;
 import br.com.ffit.comanda.service.EstabelecimentoService;
 import br.com.ffit.comanda.to.AbrirContaTO;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
-import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 
@@ -36,9 +37,6 @@ public class ProdutoFragment extends Fragment {
     @FragmentArg
     EstabelecimentoTO estabelecimentoTO;
 
-    @FragmentArg
-    UsuarioTO usuarioTO;
-
     @Bean
     EstabelecimentoService estabelecimentoService;
 
@@ -47,6 +45,9 @@ public class ProdutoFragment extends Fragment {
 
     @Bean
     ContaService contaService;
+
+    @App
+    GlobalClass globalClass;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,7 +73,7 @@ public class ProdutoFragment extends Fragment {
     @Click
     public void btnAbrirConta() {
         AbrirContaTO abrirContaTO = new AbrirContaTO();
-        abrirContaTO.setIdUsuario(usuarioTO.getId());
+        abrirContaTO.setIdUsuario(globalClass.getUsuarioLogado().getId());
         abrirContaTO.setIdEstabelecimento(estabelecimentoTO.getId());
         abrirConta(abrirContaTO);
     }

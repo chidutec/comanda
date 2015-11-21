@@ -9,7 +9,6 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -44,7 +43,6 @@ public class LoginActivity extends Activity {
 
     @AfterInject
     public void init() {
-        FacebookSdk.sdkInitialize(getApplicationContext());
         callbackManager = CallbackManager.Factory.create();
     }
 
@@ -85,7 +83,8 @@ public class LoginActivity extends Activity {
     @UiThread
     public  void callBackFazerLogin(JSONResponse<UsuarioTO> jsonResponse) {
          if(jsonResponse.getSuccess()) {
-            DashBoardClienteActivity_.intent(this).extra("usuarioTO", jsonResponse.getObj()).start();
+            DashBoardClienteActivity_.intent(this).start();
+             finish();
          }
     }
 

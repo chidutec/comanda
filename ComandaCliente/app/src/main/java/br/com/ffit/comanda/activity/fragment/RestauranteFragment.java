@@ -11,7 +11,6 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -21,7 +20,6 @@ import br.com.ffit.comanda.adapter.EstabelecimentoTOListAdapter;
 import br.com.ffit.comanda.service.EstabelecimentoService;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
-import br.com.ffit.comanda.to.UsuarioTO;
 import ffit.com.br.comanda.R;
 
 
@@ -36,9 +34,6 @@ public class RestauranteFragment extends Fragment implements AbsListView.OnItemC
 
     @Bean
     EstabelecimentoTOListAdapter estabelecimentoTOListAdapter;
-
-    @FragmentArg
-    UsuarioTO usuarioTO;
 
     private OnFragmentInteractionListener mListener;
 
@@ -58,7 +53,6 @@ public class RestauranteFragment extends Fragment implements AbsListView.OnItemC
     @UiThread
     public void callBackBuscaRestaurantes(JSONResponse<List<EstabelecimentoTO>> jsonResponse) {
         estabelecimentoTOListAdapter.setEstabelecimentoTOs(jsonResponse.getObj());
-        estabelecimentoTOListAdapter.setUsuarioTO(usuarioTO);
         mListView.setAdapter(estabelecimentoTOListAdapter);
     }
 
