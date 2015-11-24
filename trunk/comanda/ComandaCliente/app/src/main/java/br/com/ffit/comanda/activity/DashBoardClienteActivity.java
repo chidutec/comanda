@@ -68,6 +68,14 @@ public class DashBoardClienteActivity extends AppCompatActivity
         navDrawerNome.setText(usuarioLogado.getNome());
         navDrawerEmail.setText(usuarioLogado.getEmail());
         Picasso.with(this).load(usuarioLogado.getFotoUrl()).into(navDrawePicture);
+
+        FragmentManager fragmentManager = getFragmentManager();
+        Fragment selected = RestauranteFragment_.builder().build();
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.dashboardContainer, selected)
+                .commit();
+        drawer.closeDrawer(GravityCompat.START);
     }
 
     @Override

@@ -12,12 +12,12 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name="br.com.ffit.comanda.global.GlobalClass_"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name="br.com.ffit.comanda.global.GlobalClass_">
+        android:theme="@style/AppTheme" >
         <activity android:name="br.com.ffit.comanda.activity.LoginActivity_" >
         </activity>
         <activity
@@ -30,8 +30,6 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
-
         <activity android:name="br.com.ffit.comanda.activity.MainActivity_" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
