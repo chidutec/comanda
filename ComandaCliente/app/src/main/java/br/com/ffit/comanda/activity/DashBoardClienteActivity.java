@@ -23,7 +23,6 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import br.com.ffit.comanda.activity.fragment.RestauranteFragment;
 import br.com.ffit.comanda.activity.fragment.RestauranteFragment_;
 import br.com.ffit.comanda.global.GlobalClass;
 import br.com.ffit.comanda.to.UsuarioTO;
@@ -32,7 +31,7 @@ import ffit.com.br.comanda.R;
 @EActivity(R.layout.activity_dash_board_restaurante)
 @OptionsMenu({R.menu.dash_board_restaurante})
 public class DashBoardClienteActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, RestauranteFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     @ViewById(R.id.toolbar)
     Toolbar toolbar;
@@ -114,8 +113,4 @@ public class DashBoardClienteActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onFragmentInteraction(String id) {
-        Toast.makeText(this, "Carregando Tela", Toast.LENGTH_SHORT).show();
-    }
 }
