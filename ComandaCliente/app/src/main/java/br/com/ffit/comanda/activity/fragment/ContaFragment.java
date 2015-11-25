@@ -1,13 +1,19 @@
 package br.com.ffit.comanda.activity.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.ffit.comanda.activity.DashBoardClienteActivity_;
 import ffit.com.br.comanda.R;
 
 
@@ -17,52 +23,48 @@ public class ContaFragment extends Fragment {
     @ViewById(R.id.tabLayout)
     TabLayout tabLayout;
 
+    @ViewById(R.id.contaContainer)
+    ViewPager contaContainer;
+
     @AfterViews
     public void addTabs(){
+        ViewPagerAdapter adapter = new ViewPagerAdapter(((DashBoardClienteActivity_)getActivity()).getSupportFragmentManager());
+        adapter.addFragment(ParticipantesFragment_.builder().build(), "Participantes");
+        adapter.addFragment(MesaFragment_.builder().build(), "Mesa");
+        adapter.addFragment(PedidoFragment_.builder().build(), "Pedido");
+        contaContainer.setAdapter(adapter);
+        tabLayout.setupWithViewPager(contaContainer);
+        tabLayout.getTabAt(1).select();
+    }
 
-        TabLayout.Tab tabParticipantes = tabLayout.newTab().setText("Participantes");
-        tabParticipantes.setText("Participantes");
 
-        TabLayout.Tab tabMesa = tabLayout.newTab().setText("Mesa");
-        tabMesa.setText("Mesa");
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<android.support.v4.app.Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
 
-        TabLayout.Tab tabPedido = tabLayout.newTab().setText("Pedido");
-        tabPedido.setText("Pedido");
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
 
-        tabLayout.addTab(tabParticipantes);
-        tabLayout.addTab(tabMesa);
-        tabLayout.addTab(tabPedido);
+        @Override
+        public android.support.v4.app.Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                if (tab.getPosition() == 0) {
-                    FragmentManager fragmentManager = getActivity().getFragmentManager();
-                    Fragment fragment = ParticipantesFragment_.builder().build();
-                    fragmentManager.beginTransaction().replace(R.id.contaContainer, fragment).commit();
-                } else if (tab.getPosition() == 1) {
-                    FragmentManager fragmentManager = getActivity().getFragmentManager();
-                    Fragment fragment = MesaFragment_.builder().build();
-                    fragmentManager.beginTransaction().replace(R.id.contaContainer, fragment).commit();
-                } else if (tab.getPosition() == 2) {
-                    FragmentManager fragmentManager = getActivity().getFragmentManager();
-                    Fragment fragment = PedidoFragment_.builder().build();
-                    fragmentManager.beginTransaction().replace(R.id.contaContainer, fragment).commit();
-                }
-            }
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+        public void addFragment(android.support.v4.app.Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
 
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        tabMesa.select();
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
     }
 
 }
