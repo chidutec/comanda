@@ -12,7 +12,7 @@
         android:weightSum="1">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Abrir Conta"
             android:id="@+id/btnAbrirConta"
