@@ -28,7 +28,6 @@ import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
 import ffit.com.br.comanda.R;
 
-
 @EFragment(R.layout.fragment_produto)
 public class ProdutoFragment extends Fragment {
 
@@ -50,12 +49,11 @@ public class ProdutoFragment extends Fragment {
     @App
     GlobalClass globalClass;
 
-    private OnFragmentInteractionListener mListener;
-
     ProgressDialog progressDialog;
 
     @AfterInject
     public void afterInject() {
+        progressDialog = ProgressDialog.show(getActivity(), "Buscando Produtos", "Aguarde", true);
         buscaProdutos();
     }
 
@@ -69,6 +67,7 @@ public class ProdutoFragment extends Fragment {
     public void callBackBuscaProdutos(JSONResponse<List<ProdutoTO>> jsonResponse) {
         produtoTOListAdapter.setProdutoTOs(jsonResponse.getObj());
         mListView.setAdapter(produtoTOListAdapter);
+        progressDialog.dismiss();
     }
 
     @Click
@@ -81,9 +80,8 @@ public class ProdutoFragment extends Fragment {
 
     @Background
     public void abrirConta(AbrirContaTO abrirContaTO) {
-       JSONResponse jsonResponse = contaService.abrirConta(abrirContaTO);
-       callBackAbrirConta(jsonResponse);
-
+        JSONResponse jsonResponse = contaService.abrirConta(abrirContaTO);
+        callBackAbrirConta(jsonResponse);
         FragmentManager fragmentManager = getActivity().getFragmentManager();
         Fragment fragment = ContaFragment_.builder().build();
         fragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment).commit();
@@ -91,16 +89,9 @@ public class ProdutoFragment extends Fragment {
 
     @UiThread
     public void callBackAbrirConta(JSONResponse jsonResponse) {
-        if(jsonResponse.getSuccess()) {
+        if (jsonResponse.getSuccess()) {
             Toast.makeText(this.getActivity(), "Conta aberta", Toast.LENGTH_SHORT).show();
         }
-    }
-
-
-    //Interagir com outros fragmentos
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(String id);
     }
 
 }

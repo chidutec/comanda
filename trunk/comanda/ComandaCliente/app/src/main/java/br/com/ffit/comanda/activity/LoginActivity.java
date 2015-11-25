@@ -88,43 +88,4 @@ public class LoginActivity extends Activity {
          }
     }
 
-//    @Click
-//    public void btnLogin() {
-//
-//        String login = inputEmail.getText().toString();
-//        String senha = inputSenha.getText().toString();
-//
-//        if (login.isEmpty()) {
-//            Toast.makeText(this, "Preencha o Login", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        if (senha.isEmpty()) {
-//            Toast.makeText(this, "Preencha a Senha", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        LoginTO loginTO = new LoginTO();
-//        loginTO.setLogin(login);
-//        loginTO.setSenha(senha);
-//        progressDialog = ProgressDialog.show(this, "Logando", "Aguarde", true);
-//        fazerLogin(loginTO);
-//    }
-
-//    @Click
-//    public void btnCadastrar() {
-//        String login = inputEmail.getText().toString();
-//
-//        //Caso o campo login esteja preenchido, verificar disponibilidade. Se não apenas abrir a próxima tela
-//        if (!login.isEmpty()) {
-//            LoginTO loginTO = new LoginTO();
-//            loginTO.setLogin(login);
-//            progressDialog = ProgressDialog.show(this, "Verificando Disponibilidade do Login", "Aguarde", true);
-//            verificaDisponibilidadeLogin(loginTO);
-//        } else {
-//            CadastroRestauranteActivity_.intent(this).start();
-//        }
-//    }
-
-
 }
