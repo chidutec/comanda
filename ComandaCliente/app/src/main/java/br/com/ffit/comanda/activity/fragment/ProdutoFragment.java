@@ -1,6 +1,7 @@
 package br.com.ffit.comanda.activity.fragment;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.widget.AbsListView;
 import android.widget.Toast;
@@ -82,6 +83,10 @@ public class ProdutoFragment extends Fragment {
     public void abrirConta(AbrirContaTO abrirContaTO) {
        JSONResponse jsonResponse = contaService.abrirConta(abrirContaTO);
        callBackAbrirConta(jsonResponse);
+
+        FragmentManager fragmentManager = getActivity().getFragmentManager();
+        Fragment fragment = ContaFragment_.builder().build();
+        fragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment).commit();
     }
 
     @UiThread
