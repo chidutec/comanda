@@ -17,7 +17,7 @@ public class UsuarioItem {
 	@GeneratedValue
 	private Long id;
 	
-	private BigDecimal Quantidade;
+	private BigDecimal quantidade;
 	
 	@ManyToOne(cascade= CascadeType.ALL)
 	private Usuario usuario;
@@ -34,11 +34,11 @@ public class UsuarioItem {
 	}
 
 	public BigDecimal getQuantidade() {
-		return Quantidade;
+		return quantidade;
 	}
 
 	public void setQuantidade(BigDecimal quantidade) {
-		Quantidade = quantidade;
+		this.quantidade = quantidade;
 	}
 
 	public Usuario getUsuario() {
