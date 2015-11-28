@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.ffit.comanda.model.Item;
 import br.com.ffit.comanda.service.ContaService;
 import br.com.ffit.comanda.to.AbrirContaTO;
+import br.com.ffit.comanda.to.ContaTO;
 import br.com.ffit.comanda.to.JSONResponse;
+import br.com.ffit.comanda.to.ParticipanteTO;
 
 @Controller
 @RequestMapping("/conta")
@@ -23,9 +25,9 @@ public class ContaController {
 	private ContaService contaService;
 	
 	@RequestMapping(value="/abrirConta", method = RequestMethod.POST) 
-	public @ResponseBody JSONResponse abrirConta(@RequestBody AbrirContaTO abrirContaTO) {
-		JSONResponse jsonResponse = new JSONResponse();
-		contaService.abrirConta(abrirContaTO);
+	public @ResponseBody JSONResponse<ContaTO> abrirConta(@RequestBody AbrirContaTO abrirContaTO) {
+		JSONResponse<ContaTO> jsonResponse = new JSONResponse<ContaTO>();		;
+		jsonResponse.setObj(contaService.abrirConta(abrirContaTO));
 		jsonResponse.setSuccess(true);
 		jsonResponse.setMessage("Conta Criada");
 		return jsonResponse;
@@ -34,6 +36,14 @@ public class ContaController {
 	@RequestMapping(value="{id}/getItens", method = RequestMethod.GET)
 	public @ResponseBody List<Item> getItens(@PathVariable Long id) {
 		return contaService.findItensById(id);
+	}
+	
+	@RequestMapping(value="/buscaParticipantes/{idConta}", method = RequestMethod.GET)
+	public @ResponseBody JSONResponse<List<ParticipanteTO>> buscaParticipantes(@PathVariable Long idConta) {
+		JSONResponse<List<ParticipanteTO>> jsonResponse = new JSONResponse<List<ParticipanteTO>>();
+		jsonResponse.setObj(contaService.buscaParticipantes(idConta));
+		jsonResponse.setSuccess(true);
+		return jsonResponse;
 	}
 	
 }
