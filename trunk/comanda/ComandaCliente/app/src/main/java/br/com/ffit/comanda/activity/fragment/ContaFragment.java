@@ -1,6 +1,7 @@
 package br.com.ffit.comanda.activity.fragment;
 
 import android.app.Fragment;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -8,17 +9,22 @@ import android.support.v4.view.ViewPager;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ffit.comanda.activity.DashBoardClienteActivity_;
+import br.com.ffit.comanda.to.ContaTO;
 import ffit.com.br.comanda.R;
 
 
 @EFragment(R.layout.fragment_conta)
 public class ContaFragment extends Fragment {
+
+    @FragmentArg
+    ContaTO contaTO;
 
     @ViewById(R.id.tabLayout)
     TabLayout tabLayout;
@@ -57,6 +63,9 @@ public class ContaFragment extends Fragment {
         }
 
         public void addFragment(android.support.v4.app.Fragment fragment, String title) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("contaTO", contaTO);
+            fragment.setArguments(bundle);
             mFragmentList.add(fragment);
             mFragmentTitleList.add(title);
         }

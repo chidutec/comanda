@@ -23,6 +23,7 @@ import br.com.ffit.comanda.global.GlobalClass;
 import br.com.ffit.comanda.service.ContaService;
 import br.com.ffit.comanda.service.EstabelecimentoService;
 import br.com.ffit.comanda.to.AbrirContaTO;
+import br.com.ffit.comanda.to.ContaTO;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ProdutoTO;
@@ -82,14 +83,14 @@ public class ProdutoFragment extends Fragment {
     public void abrirConta(AbrirContaTO abrirContaTO) {
         JSONResponse jsonResponse = contaService.abrirConta(abrirContaTO);
         callBackAbrirConta(jsonResponse);
-        FragmentManager fragmentManager = getActivity().getFragmentManager();
-        Fragment fragment = ContaFragment_.builder().build();
-        fragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment).commit();
     }
 
     @UiThread
-    public void callBackAbrirConta(JSONResponse jsonResponse) {
+    public void callBackAbrirConta(JSONResponse<ContaTO> jsonResponse) {
         if (jsonResponse.getSuccess()) {
+            FragmentManager fragmentManager = getActivity().getFragmentManager();
+            Fragment fragment = ContaFragment_.builder().contaTO(jsonResponse.getObj()).build();
+            fragmentManager.beginTransaction().replace(R.id.dashboardContainer, fragment).commit();
             Toast.makeText(this.getActivity(), "Conta aberta", Toast.LENGTH_SHORT).show();
         }
     }
