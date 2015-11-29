@@ -8,6 +8,8 @@ import java.util.List;
 
 import br.com.ffit.comanda.rest.RestClient;
 import br.com.ffit.comanda.to.AbrirContaTO;
+import br.com.ffit.comanda.to.ContaTO;
+import br.com.ffit.comanda.to.FecharContaTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ParticipanteTO;
 
@@ -24,8 +26,16 @@ public class ContaService {
         return restClient.abrirConta(abrirContaTO);
     }
 
+    public JSONResponse fecharConta(FecharContaTO fecharContaTO) {
+        return restClient.fecharConta(fecharContaTO);
+    }
+
     public JSONResponse<List<ParticipanteTO>> buscaParticipantes(Long id) {
         return restClient.buscaParticipantes(id);
+    }
+
+    public JSONResponse<List<ContaTO>> buscaContas(Long idUsuario) {
+        return restClient.buscaContas(idUsuario);
     }
 
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.ffit.comanda.to.AbrirContaTO;
 import br.com.ffit.comanda.to.ContaTO;
 import br.com.ffit.comanda.to.EstabelecimentoTO;
+import br.com.ffit.comanda.to.FecharContaTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ParticipanteTO;
 import br.com.ffit.comanda.to.ProdutoTO;
@@ -33,7 +34,13 @@ public interface RestClient {
     @Post("/conta/abrirConta")
     JSONResponse<ContaTO> abrirConta(AbrirContaTO abrirContaTO);
 
+    @Post("/conta/fecharConta")
+    JSONResponse<ContaTO> fecharConta(FecharContaTO fecharContaTO);
+
     @Get("/conta/buscaParticipantes/{idConta}")
     JSONResponse<List<ParticipanteTO>> buscaParticipantes(Long idConta);
+
+    @Get("/conta/buscaContas/{idUsuario}")
+    JSONResponse<List<ContaTO>> buscaContas(Long idUsuario);
 
 }
