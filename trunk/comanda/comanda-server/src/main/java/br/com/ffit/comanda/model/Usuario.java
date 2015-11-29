@@ -25,10 +25,14 @@ public class Usuario {
 	private String email;
 	private String fotoUrl;
 
-	@ManyToMany
-	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "conta_id") })
-	private Set<Conta> contas;
+//	@ManyToMany
+//	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "usuario_id") }, inverseJoinColumns = {
+//			@JoinColumn(name = "conta_id") })
+//	private Set<Conta> contas;
+	
+	@Transient
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<UsuarioConta> usuarioContas;
 
 	@Transient
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
@@ -65,8 +69,6 @@ public class Usuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 
 	public String getFotoUrl() {
 		return fotoUrl;
@@ -76,12 +78,12 @@ public class Usuario {
 		this.fotoUrl = fotoUrl;
 	}
 
-	public Set<Conta> getContas() {
-		return contas;
+	public Set<UsuarioConta> getUsuarioContas() {
+		return usuarioContas;
 	}
 
-	public void setContas(Set<Conta> contas) {
-		this.contas = contas;
+	public void setUsuarioContas(Set<UsuarioConta> usuarioContas) {
+		this.usuarioContas = usuarioContas;
 	}
 
 	public Set<UsuarioItem> getUsuarioItens() {

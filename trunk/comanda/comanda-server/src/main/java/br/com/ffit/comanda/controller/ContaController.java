@@ -14,6 +14,7 @@ import br.com.ffit.comanda.model.Item;
 import br.com.ffit.comanda.service.ContaService;
 import br.com.ffit.comanda.to.AbrirContaTO;
 import br.com.ffit.comanda.to.ContaTO;
+import br.com.ffit.comanda.to.FecharContaTO;
 import br.com.ffit.comanda.to.JSONResponse;
 import br.com.ffit.comanda.to.ParticipanteTO;
 
@@ -33,6 +34,16 @@ public class ContaController {
 		return jsonResponse;
 	}
 	
+	@RequestMapping(value="/fecharConta", method = RequestMethod.POST) 
+	public @ResponseBody JSONResponse<ContaTO> fecharConta(@RequestBody FecharContaTO fecharContaTO) {
+		JSONResponse<ContaTO> jsonResponse = new JSONResponse<ContaTO>();		;
+		contaService.fecharConta(fecharContaTO);
+		jsonResponse.setSuccess(true);
+		jsonResponse.setMessage("Conta Fechada");
+		return jsonResponse;
+	}
+	
+	
 	@RequestMapping(value="{id}/getItens", method = RequestMethod.GET)
 	public @ResponseBody List<Item> getItens(@PathVariable Long id) {
 		return contaService.findItensById(id);
@@ -42,6 +53,14 @@ public class ContaController {
 	public @ResponseBody JSONResponse<List<ParticipanteTO>> buscaParticipantes(@PathVariable Long idConta) {
 		JSONResponse<List<ParticipanteTO>> jsonResponse = new JSONResponse<List<ParticipanteTO>>();
 		jsonResponse.setObj(contaService.buscaParticipantes(idConta));
+		jsonResponse.setSuccess(true);
+		return jsonResponse;
+	}
+	
+	@RequestMapping(value="/buscaContas/{idUsuario}", method = RequestMethod.GET)
+	public @ResponseBody JSONResponse<List<ContaTO>> buscaContas(@PathVariable Long idUsuario) {
+		JSONResponse<List<ContaTO>> jsonResponse = new JSONResponse<List<ContaTO>>();
+		jsonResponse.setObj(contaService.buscaContas(idUsuario));
 		jsonResponse.setSuccess(true);
 		return jsonResponse;
 	}

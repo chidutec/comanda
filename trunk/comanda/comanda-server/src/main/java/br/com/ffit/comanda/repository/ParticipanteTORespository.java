@@ -12,8 +12,9 @@ import br.com.ffit.comanda.to.ParticipanteTO;
 public interface ParticipanteTORespository extends Repository<Conta, Long>{
 	
 	String QUERY_FIND_ALL = "SELECT new br.com.ffit.comanda.to.ParticipanteTO(usuario.id, usuario.nome, usuario.fotoUrl) "
-			+ "FROM Conta as conta "
-			+ "INNER JOIN conta.usuarios as usuario "
+			+ "FROM UsuarioConta as usuarioConta "
+			+ "INNER JOIN usuarioConta.conta as conta "
+			+ "INNER JOIN usuarioConta.usuario as usuario "			
 			+ "WHERE conta.id = :idConta ";
 	
 	@Query(value = QUERY_FIND_ALL)
