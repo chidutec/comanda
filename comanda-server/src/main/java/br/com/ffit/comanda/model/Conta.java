@@ -30,9 +30,13 @@ public class Conta {
 	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
 	private Set<Item> itens;
 
-	@ManyToMany
-	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "conta_id") }, inverseJoinColumns = { @JoinColumn(name = "usuario_id") })
-	private Set<Usuario> usuarios;
+//	@ManyToMany
+//	@JoinTable(name = "usuario_conta", joinColumns = { @JoinColumn(name = "conta_id") }, inverseJoinColumns = { @JoinColumn(name = "usuario_id") })
+//	private Set<Usuario> usuarios;
+	
+	@Transient
+	@OneToMany(mappedBy = "conta", cascade = CascadeType.ALL)
+	private Set<UsuarioConta> usuarioContas;
 
 	@ManyToOne
 	private Estabelecimento estabelecimento;
@@ -69,12 +73,13 @@ public class Conta {
 		this.itens = itens;
 	}
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
+
+	public Set<UsuarioConta> getUsuarioContas() {
+		return usuarioContas;
 	}
 
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuarioContas(Set<UsuarioConta> usuarioContas) {
+		this.usuarioContas = usuarioContas;
 	}
 
 	public Estabelecimento getEstabelecimento() {
@@ -83,6 +88,12 @@ public class Conta {
 
 	public void setEstabelecimento(Estabelecimento estabelecimento) {
 		this.estabelecimento = estabelecimento;
+	}
+	
+	
+	@Transient
+	public boolean isAtiva() {
+		return (this.dataFechamento == null);
 	}
 
 }
