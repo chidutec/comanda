@@ -23,6 +23,7 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
+import br.com.ffit.comanda.activity.fragment.ContasFragment_;
 import br.com.ffit.comanda.activity.fragment.RestauranteFragment_;
 import br.com.ffit.comanda.global.GlobalClass;
 import br.com.ffit.comanda.to.UsuarioTO;
@@ -100,6 +101,8 @@ public class DashBoardClienteActivity extends AppCompatActivity
 
         if (id == R.id.nav_restaurante) {
             selected = RestauranteFragment_.builder().build();
+        } else if (id == R.id.nav_conta) {
+            selected = ContasFragment_.builder().build();
         } else if (id == R.id.nav_logout) {
             LoginManager.getInstance().logOut();
             LoginActivity_.intent(this).start();
