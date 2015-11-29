@@ -11,16 +11,31 @@
         android:layout_height="match_parent"
         android:layout_gravity="top">
 
-        <Button
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Convidar Amigo"
-            android:id="@+id/btnConvidarAmigo" />
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recarregar"
+                android:id="@+id/btnRecarregar"
+                android:layout_gravity="left" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Convidar Amigo"
+                android:id="@+id/btnConvidarAmigo" />
+
+        </LinearLayout>
+
+
 
         <ListView
             android:id="@+id/listParticipantesConta"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="470dp" />
     </LinearLayout>
 
 </FrameLayout>

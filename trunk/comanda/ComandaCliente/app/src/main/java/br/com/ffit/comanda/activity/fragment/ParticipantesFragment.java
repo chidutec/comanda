@@ -8,6 +8,7 @@ import android.widget.ListView;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.UiThread;
@@ -58,7 +59,10 @@ public class ParticipantesFragment extends Fragment {
         listParticipantesConta.setAdapter(participantesTOAdapter);
     }
 
-
+    @Click
+    public void btnRecarregar() {
+        buscaParticipantes();
+    }
 
 
 }
