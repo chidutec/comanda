@@ -10,7 +10,7 @@ import br.com.ffit.comanda.model.UsuarioConta;
 
 public interface UsuarioContaRepository extends CrudRepository<UsuarioConta, Long>{
 	
-	UsuarioConta findByUsuarioAndConta(Usuario Usuario, Conta conta);
+	UsuarioConta findByUsuarioAndConta(Usuario usuario, Conta conta);
 	
 	List<UsuarioConta> findByContaAndDataFechamentoIsNull(Conta conta);
 	
