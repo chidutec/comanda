@@ -10,7 +10,7 @@ import org.androidannotations.annotations.EBean;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.ffit.comanda.to.UsuarioTO;
@@ -43,16 +43,34 @@ public class FacebookService {
     }
 
     public List<UsuarioTO> getUserFriends() {
-        Bundle params = new Bundle();
-        params.putString("fields", "friends");
 
-        JSONArray jsonArray = new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me",
-                params,
-                HttpMethod.GET
-        ).executeAndWait().getJSONArray();
-        return Arrays.asList(new UsuarioTO());
+
+        try {
+            Bundle params = new Bundle();
+
+            JSONArray jsonArray = new GraphRequest(
+                    AccessToken.getCurrentAccessToken(),
+                    "/me/friends",
+                    params,
+                    HttpMethod.GET
+            ).executeAndWait().getJSONObject().getJSONArray("data");
+
+
+            List<UsuarioTO> usuarioTOs = new ArrayList<>();
+            for(int i = 0; i < jsonArray.length() ; i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                UsuarioTO usuarioTO = new UsuarioTO();
+                usuarioTO.setId(jsonObject.getLong("id"));
+                usuarioTO.setNome(jsonObject.getString("name"));
+
+                usuarioTOs.add(usuarioTO);
+            }
+            return usuarioTOs;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

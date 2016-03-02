@@ -64,5 +64,10 @@ public class ParticipantesFragment extends Fragment {
         buscaParticipantes();
     }
 
+    @Click void btnConvidarAmigo() {
+        ConvidarAmigoModalFragment_.builder().build().show(getActivity().getFragmentManager(),"convidarAmigo");
+    }
+
+
 
 }
