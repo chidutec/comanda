@@ -16,7 +16,7 @@ import br.com.ffit.comanda.to.ParticipanteTO;
 import br.com.ffit.comanda.to.ProdutoTO;
 import br.com.ffit.comanda.to.UsuarioTO;
 
-@Rest(rootUrl = "http://192.168.1.102:8080/comanda-server", converters = {MappingJackson2HttpMessageConverter.class})
+@Rest(rootUrl = "http://192.168.1.107:8080/comanda-server", converters = {MappingJackson2HttpMessageConverter.class})
 public interface RestClient {
 
     @Post("/usuario/fazerLogin")
